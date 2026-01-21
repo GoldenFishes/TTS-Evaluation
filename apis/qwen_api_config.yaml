@@ -1,0 +1,5 @@
+# Qwen TTS API Keys
+# 北京地域（国内）- 用于所有非海外正式环境
+CN_API_KEY: ""
+# 新加坡地域（海外）- 仅用于海外正式环境
+INTL_API_KEY: ""
