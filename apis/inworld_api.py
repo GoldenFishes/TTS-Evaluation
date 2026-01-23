@@ -140,52 +140,51 @@ class InworldAPI(APIBase):
         # --- 2) 调用 Streaming TTS API 开始流式合成 ---
         start = time.perf_counter()
 
-        try:
-            for text_piece in target_text:
-                payload = {
-                    "text": text_piece,  # 单条文本
-                    "voiceId": voice_id,
-                    "modelId": self.model_name,
-                    "audio_config": {
-                        "audio_encoding": "LINEAR16",  # PCM WAV
-                        "sample_rate_hertz": 48000,
-                    },
-                }
+        for text_piece in target_text:
+            payload = {
+                "text": text_piece,  # 单条文本
+                "voiceId": voice_id,
+                "modelId": self.model_name,
+                "audio_config": {
+                    "audio_encoding": "LINEAR16",  # PCM WAV
+                    "sample_rate_hertz": 48000,
+                },
+            }
 
-                response = requests.post(tts_url, json=payload, headers=self._auth_headers(), stream=True)
-                response.raise_for_status()
+            response = requests.post(tts_url, json=payload, headers=self._auth_headers(), stream=True)
+            response.raise_for_status()
 
-                for line in response.iter_lines():
-                    if not line:
-                        continue
-                    line_obj = json.loads(line)
-                    # 取出base64编码的音频字段
-                    b64_audio = line_obj.get("result", {}).get("audioContent")
-                    if not b64_audio:
-                        continue
+            for line in response.iter_lines():
+                if not line:
+                    continue
+                line_obj = json.loads(line)
+                # 取出base64编码的音频字段
+                b64_audio = line_obj.get("result", {}).get("audioContent")
+                if not b64_audio:
+                    continue
 
-                    raw_chunk = base64.b64decode(b64_audio)
-                    if len(raw_chunk) <= 44:
-                        continue
-                    pcm_data = raw_chunk[44:]  # 跳 WAV header
-                    yield (
-                        pcm_data,  # 原始 PCM
-                        48000,  # sample_rate
-                        1,  # channels
-                        16,  # bit_depth
-                        start
-                    )
+                raw_chunk = base64.b64decode(b64_audio)
+                if len(raw_chunk) <= 44:
+                    continue
+                pcm_data = raw_chunk[44:]  # 跳 WAV header
+                yield (
+                    pcm_data,  # 原始 PCM
+                    48000,  # sample_rate
+                    1,  # channels
+                    16,  # bit_depth
+                    start
+                )
 
         # --- 3) 删除已创建的声音
-        finally:
-            if voice_id:
-                # FIXME:修复删除音色时总是失败的问题
-                try:
-                    self.delete_voice(self.config["API_KEY"], self.config["WORKSPACE_ID"], voice_id)
-                    # print(f"[inworld] deleted voiceId={voice_id}")
-                except Exception as e:
-                    # 不要影响上游流程
-                    print(f"[inworld][WARN] failed to delete voice {voice_id}: {e}")
+        if voice_id:
+            pass
+            # # FIXME:修复删除音色时总是失败的问题
+            # try:
+            #     self.delete_voice(self.config["API_KEY"], self.config["WORKSPACE_ID"], voice_id)
+            #     # print(f"[inworld] deleted voiceId={voice_id}")
+            # except Exception as e:
+            #     # 不要影响上游流程
+            #     print(f"[inworld][WARN] failed to delete voice {voice_id}: {e}")
 
     def _auth_headers(self):
         return {

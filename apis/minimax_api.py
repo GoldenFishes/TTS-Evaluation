@@ -8,6 +8,7 @@ import time
 import soundfile as sf
 import asyncio
 import websockets
+import websocket
 from websockets.exceptions import ConnectionClosedOK, ConnectionClosed
 import json
 import ssl
@@ -117,86 +118,220 @@ class MiniMaxAPI(APIBase):
         '''
         upload_url = "https://api.minimaxi.com/v1/files/upload"
         clone_url = "https://api.minimaxi.com/v1/voice_clone"
+        get_voice_url = "https://api.minimaxi.com/v1/get_voice"
         delete_voice_url = "https://api.minimaxi.com/v1/delete_voice"
         ws_url = "wss://api.minimaxi.com/ws/v1/t2a_v2"
         headers = {"Authorization": f"Bearer {self.config["API_KEY"]}"}
 
-        voice_id = "Voice_" + str(uuid.uuid4())  # 自定义用于命名的音色ID,首字母必须为英文
+        '''
+        我们首先查找声音，如果存在已创建的对应音色则不再继续创建
+        '''
+        filename_with_ext = os.path.basename(reference_audio)
+        voice_name = os.path.splitext(filename_with_ext)[0]
+        voice_id = voice_name
+        # print("voice_id =", voice_id)
 
-        # 1. 读取 reference_audio wav，延长至 ≥10秒。 同步延长 reference_text 至相应倍数。
-        # MiniMax音色克隆要求参考音频大于10秒，我们的所有测试数据音频均不满足，故我们需要延长该音频至大于10s
-        wav, sr = self.load_wav(reference_audio)
-        extended_wav, reps = self.repeat_with_crossfade(wav, sr, target_sec=10.0)
-        # 同步复制文本
-        reference_text = reference_text * reps
-        temp_wav = f"temp/{voice_id}.wav"
-        self.save_wav(extended_wav, temp_wav, sr)
+        # self.delete_all_flies()  # 清理所有文件
 
-        # 2. 创建音色
-        # （可选）上传该音色的更多示例 见 https://platform.minimaxi.com/docs/guides/speech-voice-clone
-
-        # 上传文件
-        with open(temp_wav, "rb") as f:  # 传入延长后的音色参考文件
-            response = requests.post(
-                upload_url,
-                headers=headers,
-                data={"purpose": "voice_clone"},
-                files={"file": (os.path.basename(reference_audio), f)},
-            )
+        response = requests.post(
+            get_voice_url,
+            headers={
+                "Authorization": f"Bearer {self.config["API_KEY"]}",
+                "Content-Type": "application/json"
+            },
+            json={
+                "voice_type": "voice_cloning"  # 只查询克隆音色
+            }
+        )
         response.raise_for_status()
-        file_id = response.json().get("file", {}).get("file_id")
-        # print("file_id", file_id)
+        voices = response.json().get("voice_cloning", [])
+        # print("voices",voices)
 
-        # 克隆音色
-        clone_payload = {
-            "file_id": file_id,
-            "voice_id": voice_id,
-            # "clone_prompt": {
-            #     "prompt_audio": prompt_file_id,
-            #     "prompt_text": "后来认为啊，是有人抓这鸡，可是抓鸡的地方呢没人听过鸡叫。"
-            # },
-            "text": reference_text,
-            "model": self.model_name
-        }
-        clone_headers = {
-            "Authorization": f"Bearer {self.config["API_KEY"]}",
-            "Content-Type": "application/json"
-        }
-        response = requests.post(clone_url, headers=clone_headers, json=clone_payload)
-        # print("create clone voice:",response.text)
+        # self._delete_all_voices(voices, delete_voice_url)  # 删除所有音色
+
+        exist_voice = any(v.get("voice_id") == voice_id for v in voices)
+        # print("exist_voice",exist_voice)
+
+        # 如果未创建则创建，否则直接使用已创建的
+        if exist_voice:
+            voice_id = voice_id
+        else:
+            print(f"[创建音色]：{voice_id}")
+            # 1. 读取 reference_audio wav，延长至 ≥10秒。 同步延长 reference_text 至相应倍数。
+            # MiniMax音色克隆要求参考音频大于10秒，我们的所有测试数据音频均不满足，故我们需要延长该音频至大于10s
+            wav, sr = self.load_wav(reference_audio)
+            extended_wav, reps = self.repeat_with_crossfade(wav, sr, target_sec=10.0)
+            # 同步复制文本
+            reference_text = reference_text * reps
+            temp_wav = f"temp/{voice_id}.wav"
+            self.save_wav(extended_wav, temp_wav, sr)
+
+            # 2. 创建音色
+            # （可选）上传该音色的更多示例 见 https://platform.minimaxi.com/docs/guides/speech-voice-clone
+
+            # 上传文件
+            with open(temp_wav, "rb") as f:  # 传入延长后的音色参考文件
+                response = requests.post(
+                    upload_url,
+                    headers=headers,
+                    data={"purpose": "voice_clone"},
+                    files={"file": (os.path.basename(reference_audio), f)},
+                )
+            response.raise_for_status()
+            file_id = response.json().get("file", {}).get("file_id")
+            # print("file_id", file_id)
+
+            # 克隆音色
+            clone_payload = {
+                "file_id": file_id,
+                "voice_id": voice_id,
+                # "clone_prompt": {
+                #     "prompt_audio": prompt_file_id,
+                #     "prompt_text": "后来认为啊，是有人抓这鸡，可是抓鸡的地方呢没人听过鸡叫。"
+                # },
+                "text": reference_text,
+                "model": self.model_name
+            }
+            clone_headers = {
+                "Authorization": f"Bearer {self.config["API_KEY"]}",
+                "Content-Type": "application/json"
+            }
+            response = requests.post(clone_url, headers=clone_headers, json=clone_payload)
+            # print("create clone voice:",response.text)
+
+            # 清楚保存的临时音频
+            os.remove(temp_wav)
 
         # 3. 声音克隆
-        # 同步调用异步生成器
-        loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(loop)
-        agen = self._stream_tts(ws_url, headers, voice_id, target_text)
+        # 同步调用声音克隆
+        for chunk_info in self._stream_tts_sync(ws_url, headers, voice_id, target_text):
+            yield chunk_info
+
+        # # 同步调用异步生成器
+        # loop = asyncio.new_event_loop()
+        # asyncio.set_event_loop(loop)
+        # agen = self._stream_tts(ws_url, headers, voice_id, target_text)
+        # try:
+        #     while True:
+        #         chunk_info = loop.run_until_complete(agen.__anext__())
+        #         yield chunk_info
+        # except StopAsyncIteration:
+        #     loop.close()
+
+    # ---------------- 内部函数 ----------------
+    def _stream_tts_sync(self, ws_url, headers, voice_id, target_text):
+        # 固定参数
+        sample_rate = 32000
+        channels = 1
+        bit_depth = 16
+
+        ws = websocket.create_connection(
+            ws_url,
+            header=[f"{k}: {v}" for k, v in headers.items()],
+            sslopt={"cert_reqs": ssl.CERT_NONE},
+        )
+
+        # print("[DEBUG] WebSocket connected")
+
         try:
+            # ----------------- 建立连接 -----------------
             while True:
-                chunk_info = loop.run_until_complete(agen.__anext__())
-                yield chunk_info
-        except StopAsyncIteration:
-            loop.close()
+                raw = ws.recv()
+                if not raw:
+                    continue
+                try:
+                    msg = json.loads(raw)
+                except Exception:
+                    continue
 
-        # 4. 清除
-        # 清楚保存的临时音频
-        os.remove(temp_wav)
+                if msg.get("event") == "connected_success":
+                    # print("[DEBUG] connected_success received")
+                    break
 
-        # 清除创建的音色
-        payload = {
-            "voice_type": "voice_cloning",
-            "voice_id": voice_id
-        }
-        response = requests.post(delete_voice_url, headers=headers, json=payload)
+            # ----------------- 发送 task_start -----------------
+            ws.send(json.dumps({
+                "event": "task_start",
+                "model": self.model_name,
+                "voice_setting": {"voice_id": voice_id, "speed": 1, "vol": 1, "pitch": 0},
+                "audio_setting": {
+                    "sample_rate": sample_rate,  # 可选 [8000，16000，22050，24000，32000，44100]
+                    # "bitrate": 128000  # 可选 [32000，64000，128000，256000]，仅对mp3格式音频生效
+                    "format": "pcm",
+                    "channel": channels
+                }
+            }))
+            # print("[DEBUG] task_start sent")
 
-        response.raise_for_status()
-        resp_json = response.json()
-        if resp_json.get("base_resp", {}).get("status_code") == 0:
-            # print(f"Voice {voice_id} deleted successfully")
-            pass
-        else:
-            print(f"Failed to delete voice {voice_id}: {resp_json}")
+            # 等待 task_started
+            while True:
+                raw = ws.recv()
+                if not raw:
+                    continue
+                try:
+                    msg = json.loads(raw)
+                except:
+                    continue
+                if msg.get("event") == "task_started":
+                    call_start_ts = time.perf_counter()
+                    print("[DEBUG] task_started received")
+                    break
+                elif msg.get("event") == "task_failed":
+                    raise RuntimeError("task_failed during start")
 
-    # ---------------- 内部异步函数 ----------------
+            # ----------------- 发送文本 & 接收 chunk -----------------
+            for txt in target_text:
+                print(f"[DEBUG] sending text: {txt}")
+                ws.send(json.dumps({"event": "task_continue", "text": txt}))
+
+                while True:
+                    raw = ws.recv()
+                    if not raw:
+                        continue
+                    try:
+                        msg = json.loads(raw)
+                        # handle task_failed
+                        if msg.get("event") == "task_failed":
+                            error_msg = msg.get("base_resp", {}).get("status_msg", "unknown error")
+                            print(f"[ERROR] task_failed: {error_msg}")
+                            return
+                    except Exception as e:
+                        print(f"[DEBUG] task failed: {e}")
+                        continue
+
+                    # chunk 音频
+                    if "data" in msg and "audio" in msg["data"]:
+                        pcm_chunk = bytes.fromhex(msg["data"]["audio"])
+                        yield pcm_chunk, sample_rate, channels, bit_depth, call_start_ts
+
+                    # 文本生成完成
+                    if msg.get("is_final"):
+                        print("[DEBUG] text chunk finished")
+                        break
+
+            # ----------------- 完成任务 -----------------
+            ws.send(json.dumps({"event": "task_finish"}))
+            print("[DEBUG] task_finish sent")
+
+            while True:
+                raw = ws.recv()
+                if not raw:
+                    continue
+                try:
+                    msg = json.loads(raw)
+                except:
+                    continue
+                if msg.get("event") == "task_finished":
+                    print("[DEBUG] task_finished received")
+                    return
+
+        except websocket.WebSocketConnectionClosedException:
+            # 服务端主动关闭连接，正常结束
+            return
+
+        finally:
+            ws.close()
+            print("[DEBUG] WebSocket closed")
+
     async def _stream_tts(
         self,
         ws_url,
@@ -320,6 +455,63 @@ class MiniMaxAPI(APIBase):
         wav_np = wav.detach().cpu().numpy().T  # 转为 [samples, channels]
         sf.write(path, wav_np, sr, subtype='PCM_16')
         # print(f"Saved WAV to {path}")
+
+    def _delete_all_voices(self, voices, delete_voice_url):
+        print("删除所有创建的音色中...")
+        for voice in voices:
+            voice_id = voice.get("voice_id")
+            response = requests.post(
+                delete_voice_url,
+                headers={
+                    "Authorization": f"Bearer {self.config["API_KEY"]}",
+                    "Content-Type": "application/json"
+                },
+                json={
+                    "voice_type": "voice_cloning",
+                    "voice_id": voice.get("voice_id")
+                }
+            )  # 删除音色
+            response.raise_for_status()
+            resp_json = response.json()
+            if resp_json.get("base_resp", {}).get("status_code") == 0:
+                print(f"Voice {voice_id} deleted successfully")
+                pass
+            else:
+                print(f"Failed to delete voice {voice_id}: {resp_json}")
+            time.sleep(0.1)
+
+    def delete_all_flies(self):
+        '''
+        FIXME: 无法删除文件，返回报错 {'file_id': 0, 'base_resp': {'status_code': 1000, 'status_msg': 'unknown error'}}
+        '''
+        response = requests.get(
+            "https://api.minimaxi.com/v1/files/list",
+            headers={"Authorization": f"Bearer {self.config["API_KEY"]}"}
+        )
+        response.raise_for_status()
+        for file_info in response.json().get("files", []):
+            file_id = file_info.get("file_id")
+            purpose = file_info.get("purpose")
+            # 删除该文件
+            print(f"[Delete FLIES] file_id: {int(file_id)} purpose: {purpose}]")
+            del_resp = requests.post(
+                "https://api.minimaxi.com/v1/files/delete",
+                headers={
+                    "Authorization": f"Bearer {self.config['API_KEY']}",
+                    "Content-Type": "multipart/form-data"
+                },
+                data=json.dumps({
+                  "file_id": int(file_id),
+                  "purpose": str(purpose)
+                })
+            )
+            del_resp.raise_for_status()
+            resp_json = del_resp.json()
+            if resp_json.get("base_resp", {}).get("status_code") == 0:
+                print(f"File {file_id} deleted successfully")
+            else:
+                print(f"Failed to delete file {file_id}: {resp_json}")
+            time.sleep(0.1)
 
 
 if __name__ == "__main__":
