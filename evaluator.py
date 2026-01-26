@@ -941,6 +941,7 @@ if __name__ == "__main__":
     
     TTSEvaluator.evaluate_all() 一般效果评测，指定voice clone的任务与音色，自动遍历进行
     TTSEvaluator.concurrency_test() 并发测试，指定voice clone的任务text_task_support为["long_stream_prompt"]，使用其中用于流式生成的样本进行并发测试
+    TTSEvaluator.qpm_test() QPM测试，指定voice clone的任务text_task_support为["short_prompt"]，使用其中的短样本进行QPM上限的测试
     '''
     # API名称与具体模型名称的配置, 测试工具会自动遍历所有配置
     api_and_model_names = {
@@ -959,8 +960,10 @@ if __name__ == "__main__":
         voice_task_support=["base_voice_prompt"],
     )
 
-    evaluator.evaluate_all()  # 效果评测
-
+    # 一般效果评测
+    evaluator.evaluate_all()
+    
+    # 并发测试
     # evaluator.concurrency_test(single_chunk_mode=False)  # 使用并发测试时，任务必须选择 text_task_support=["long_stream_prompt"]，保证样本生成的正常长度大于1分钟
     '''
     1. 确保初始化 TTSEvaluator() 中任务 text_task_support 为 ["long_stream_prompt"]
