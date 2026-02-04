@@ -273,14 +273,14 @@ class MiniMaxAPI(APIBase):
                     continue
                 if msg.get("event") == "task_started":
                     call_start_ts = time.perf_counter()
-                    print("[DEBUG] task_started received")
+                    # print("[DEBUG] task_started received")
                     break
                 elif msg.get("event") == "task_failed":
                     raise RuntimeError("task_failed during start")
 
             # ----------------- 发送文本 & 接收 chunk -----------------
             for txt in target_text:
-                print(f"[DEBUG] sending text: {txt}")
+                # print(f"[DEBUG] sending text: {txt}")
                 ws.send(json.dumps({"event": "task_continue", "text": txt}))
 
                 while True:
@@ -305,12 +305,12 @@ class MiniMaxAPI(APIBase):
 
                     # 文本生成完成
                     if msg.get("is_final"):
-                        print("[DEBUG] text chunk finished")
+                        # print("[DEBUG] text chunk finished")
                         break
 
             # ----------------- 完成任务 -----------------
             ws.send(json.dumps({"event": "task_finish"}))
-            print("[DEBUG] task_finish sent")
+            # print("[DEBUG] task_finish sent")
 
             while True:
                 raw = ws.recv()
@@ -321,7 +321,7 @@ class MiniMaxAPI(APIBase):
                 except:
                     continue
                 if msg.get("event") == "task_finished":
-                    print("[DEBUG] task_finished received")
+                    # print("[DEBUG] task_finished received")
                     return
 
         except websocket.WebSocketConnectionClosedException:
@@ -330,7 +330,7 @@ class MiniMaxAPI(APIBase):
 
         finally:
             ws.close()
-            print("[DEBUG] WebSocket closed")
+            # print("[DEBUG] WebSocket closed")
 
     async def _stream_tts(
         self,

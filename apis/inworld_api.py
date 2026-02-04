@@ -79,9 +79,6 @@ class InworldAPI(APIBase):
             call_start_ts,      # 开始调用时的时间戳 排除首次创建音色的时间
         )
         '''
-        clone_url = f"https://api.inworld.ai/voices/v1/workspaces/{self.config["WORKSPACE_ID"]}/voices:clone"
-        tts_url = "https://api.inworld.ai/tts/v1/voice:stream"
-
         # --- 1) 调用 Clone Voice API 创建 voice ---
         '''
         该API存在bug，无法正常删除声音，故我们首先查找声音，如果存在已创建的对应音色则不再继续创建
@@ -91,7 +88,8 @@ class InworldAPI(APIBase):
 
         filename_with_ext = os.path.basename(reference_audio)
         voice_name= os.path.splitext(filename_with_ext)[0]
-        # print("voice_name", voice_name)
+        # print(f"[InWorld] 音色名称: {voice_name}")
+
         if "EN" in voice_name.upper():
             langCode = "EN_US"
         elif "ZH" in voice_name.upper():
@@ -102,19 +100,21 @@ class InworldAPI(APIBase):
         # 获取当前工作区中所有已创建的声音
         filtered = self.list_voices_by_language(
             api_key=self.config["API_KEY"],
-            workspace=self.config["WORKSPACE_ID"],
             languages=[langCode]
         )
+        # print(f"[DEBUG] 获取所有已创建的声音：{filtered}")
 
         exist_voice = next(
             (v for v in filtered if voice_name.lower() in v["voiceId"].lower()),
             None  # 如果找不到就返回 None
         )
-        # print(exist_voice)
+        # print(f"[InWorld] 过滤出已存在的匹配的声音 {exist_voice}")
 
         if exist_voice:
             voice_id = exist_voice["voiceId"]
+            # print(f"[InWorld] ✓ 找到已存在音色: {voice_id}")
         else:
+            # print(f"[InWorld] 未找到音色，开始克隆...")
             clone_body = {
                 "displayName": voice_name,  # 提示音频的文件名不带后缀
                 "langCode": langCode,
@@ -125,8 +125,11 @@ class InworldAPI(APIBase):
                     }
                 ],
             }
-
-            r_clone = requests.post(clone_url, headers=self._auth_headers(), json=clone_body)
+            r_clone = requests.post(
+                "https://api.inworld.ai/voices/v1/voices:clone",
+                headers=self._auth_headers(),
+                json=clone_body
+            )
             if r_clone.status_code != 200:
                 print("Clone failed:", r_clone.text)
             r_clone.raise_for_status()
@@ -134,12 +137,18 @@ class InworldAPI(APIBase):
             # print(f"result_clone: {result_clone}")
             # 得到克隆后的 voiceId
             voice_id = result_clone["voice"]["voiceId"]
-            # print(f"[clone_voice] created voiceId = {voice_id}")
+            # print(f"[InWorld] ✓ Clone成功, voice_id: {voice_id}")
 
+        # print(f"[Debug]:{voice_id}")
 
         # --- 2) 调用 Streaming TTS API 开始流式合成 ---
         start = time.perf_counter()
 
+        '''
+        这里样本中每个chunk都作为一次单独请求，如果希望只使用一个请求包含所有chunk的话应当在并发测试中
+        TTSEvaluator.concurrency_test()传入single_chunk_mode=True
+        来控制只有一个chunk，而不是在此处直接使用 full_text = " ".join(target_text) 修改
+        '''
         for text_piece in target_text:
             payload = {
                 "text": text_piece,  # 单条文本
@@ -151,7 +160,17 @@ class InworldAPI(APIBase):
                 },
             }
 
-            response = requests.post(tts_url, json=payload, headers=self._auth_headers(), stream=True)
+            response = requests.post(
+                "https://api.inworld.ai/tts/v1/voice:stream",
+                json=payload,
+                headers=self._auth_headers(),
+                stream=True
+            )
+            # print(f"[InWorld] 响应状态码: {response.status_code}")
+            # print(f"[InWorld] 响应URL: {response.url}")
+            if response.status_code != 200:
+                print(f"[InWorld] ✗ 错误响应内容: {response.text[:500]}")
+
             response.raise_for_status()
 
             for line in response.iter_lines():
@@ -192,8 +211,8 @@ class InworldAPI(APIBase):
             "Content-Type": "application/json",
         }
 
-    def delete_voice(self, api_key: str, workspace: str, voice_id: str):
-        url = f"https://api.inworld.ai/voices/v1/workspaces/{workspace}/voices/{voice_id}"
+    def delete_voice(self, api_key: str, voice_id: str):
+        url = f"https://api.inworld.ai/voices/v1/voices/{voice_id}"
         headers = {
             "Authorization": f"Basic {api_key}"
         }
@@ -201,15 +220,12 @@ class InworldAPI(APIBase):
         resp.raise_for_status()
         return resp.json()  # 返回 {} 或成功 JSON
 
-    def list_voices_by_language(self, api_key: str, workspace: str, languages: list[str]):
+    def list_voices_by_language(self, api_key: str, languages: list[str]):
         """
         列出 workspace 下指定语言的声音
         """
-        url = f"https://api.inworld.ai/voices/v1/workspaces/{workspace}/voices"
-        headers = {
-            "Authorization": f"Basic {api_key}",
-            "Content-Type": "application/json",
-        }
+        url = f"https://api.inworld.ai/voices/v1/voices"
+        headers = {"Authorization": f"Basic {api_key}"}
 
         resp = requests.get(url, headers=headers)
         resp.raise_for_status()
@@ -230,16 +246,35 @@ if __name__ == "__main__":
     out_pcm = pathlib.Path("result/test_out.pcm")
 
     with out_pcm.open("wb") as f:
+        chunk_count = 0
+        vc_start_time = time.perf_counter()
         for pcm_chunk, sample_rate, channels, bit_depth, ts in api.voice_clone(
                 target_text=[
-                    "你好，这是一个流式语音合成测试。",
-                    "我们正在验证是否可以正确返回音频数据。",
+                    "晨间阅读半小时，完成健身计划。处理邮件与日程安排，推进项目A的测试阶段。晚间参加线上技术分享会，收获颇丰。",
                 ],
                 reference_audio="data/voice_prompt/base_voice_prompt/voice_ZH_zhongli.wav",
                 reference_text="茶叶各有特征，喝得多了自然有些心得。茶品好坏，闻香味便可略知一二了。"
         ):
-            print(f"[TEST] got chunk: {len(pcm_chunk)} bytes")
+            current_time = time.perf_counter()
+            chunk_count += 1
+            elapsed = current_time - ts
+            if chunk_count == 1:
+                preprocess_time = ts - vc_start_time
+                print(f"[TEST] 预处理时间（音色查找/创建） {preprocess_time:.4f}s")
+
+            print(f"[TEST] Chunk #{chunk_count:02d} | "
+                  f"Size: {len(pcm_chunk):5d} bytes | "
+                  f"Elapsed: {elapsed:.4f}s")
             f.write(pcm_chunk)
+        '''
+        [TEST] 预处理时间（音色查找/创建） 0.8343s
+        [TEST] Chunk #01 | Size: 216960 bytes | Elapsed: 2.4416s
+        [TEST] Chunk #02 | Size: 130080 bytes | Elapsed: 2.5917s
+        [TEST] Chunk #03 | Size: 212640 bytes | Elapsed: 2.7500s
+        [TEST] Chunk #04 | Size: 190560 bytes | Elapsed: 2.9987s
+        [TEST] Chunk #05 | Size: 274080 bytes | Elapsed: 3.6538s
+        [TEST] Chunk #06 | Size: 106560 bytes | Elapsed: 3.8078s
+        '''
 
     # 将写入的pcm转成wav进行验证
     wav_path = out_pcm.with_suffix(".wav")

@@ -136,7 +136,13 @@ class QWenAPI(APIBase):
         qwen_tts_realtime.connect()
 
         # 1. 创建新的音色 根据 reference_audio
-        voice = self._create_voice(pathlib.Path(reference_audio))
+        preferred_name = pathlib.Path(reference_audio).stem
+        voice = self._get_or_create_voice(
+            reference_audio_path=pathlib.Path(reference_audio),
+            preferred_name=preferred_name
+        )
+        # print("preferred_name:", preferred_name)
+        # print("voice:", voice)
 
         # 2. 提交设置
         qwen_tts_realtime.update_session(
@@ -165,8 +171,112 @@ class QWenAPI(APIBase):
         if callback.error:
             raise callback.error
 
+    def _get_or_create_voice(
+            self,
+            preferred_name: str,
+            reference_audio_path: pathlib.Path,
+    ):
+        """
+        查找或创建音色：
+        - 在 voice 列表里查找 voice 字段中是否包含 preferred_name
+        - 命中则返回完整 voice
+        - 未命中则创建新的音色
+        """
+        if not preferred_name:
+            raise ValueError("preferred_name 不能为空")
 
-    def _create_voice(self, reference_audio):
+        # 1️⃣ 查询已有音色
+        voices = self._get_voice_list(page_size=50, page_index=0)
+
+        for item in voices:
+            voice_full = item.get("voice", "")
+            if preferred_name in voice_full:
+                # print(
+                #     f"[voice] 命中已有音色: preferred_name={preferred_name}, "
+                #     f"voice={voice_full}"
+                # )
+                return voice_full
+
+        # 2️⃣ 未命中 → 创建新音色
+        # print(
+        #     f"[voice] 未找到音色 preferred_name={preferred_name}，开始创建"
+        # )
+
+        voice_full = self._create_voice(
+            reference_audio=reference_audio_path,
+            preferred_name=preferred_name,
+        )
+
+        # print(
+        #     f"[voice] ✅ 创建成功: preferred_name={preferred_name}, "
+        #     f"voice={voice_full}"
+        # )
+
+        return voice_full
+
+    def _delete_all_voices(self, page_size: int = 20, max_rounds: int = 100):
+        """
+        删除当前账号下的所有音色（带打印日志）
+
+        - 每轮打印查询到的全部音色
+        - 每个成功删除的音色都会打印提示
+        """
+        round_idx = 0
+        deleted_count = 0
+
+        while True:
+            if round_idx >= max_rounds:
+                raise RuntimeError(
+                    f"[voice-clean] 超过最大轮数 {max_rounds}，可能存在异常"
+                )
+
+            print(f"\n[voice-clean] ===== 第 {round_idx + 1} 轮查询 =====")
+
+            # 每一轮都从 page_index = 0 拉
+            voice_list = self._get_voice_list(
+                page_size=page_size,
+                page_index=0
+            )
+
+            if not voice_list:
+                print("[voice-clean] 当前已无任何音色，清理完成 ✅")
+                break
+
+            print(f"[voice-clean] 查询到 {len(voice_list)} 个音色：")
+            for item in voice_list:
+                print(
+                    f"  - voice={item.get('voice')} | "
+                    f"name={item.get('preferred_name')} | "
+                    f"model={item.get('target_model')} | "
+                    f"create={item.get('gmt_create')}"
+                )
+
+            # 删除本轮音色
+            for item in voice_list:
+                voice = item.get("voice")
+                if not voice:
+                    continue
+
+                try:
+                    self._delete_voice(voice)
+                    deleted_count += 1
+                    print(f"[voice-clean] ✅ 已删除音色: {voice}")
+                except Exception as e:
+                    print(f"[voice-clean] ❌ 删除音色失败: {voice}, error={e}")
+                    raise
+
+            round_idx += 1
+
+        print(
+            f"\n[voice-clean] 🎉 清理完成，总共删除音色数量: {deleted_count}"
+        )
+
+        return {
+            "status": "completed",
+            "deleted": deleted_count
+        }
+
+    def _create_voice(self, reference_audio, preferred_name):
         '''
         创建音色，并返回 voice 参数
         '''
@@ -186,7 +296,7 @@ class QWenAPI(APIBase):
             "input": {
                 "action": "create",
                 "target_model": self.model_name,
-                "preferred_name": "new_voice",  # TODO 这里应该是暂时随便给当前音色起个名字
+                "preferred_name": preferred_name,
                 "audio": {"data": data_uri}
             }
         }
@@ -205,6 +315,97 @@ class QWenAPI(APIBase):
         except (KeyError, ValueError) as e:
             raise RuntimeError(f"解析 voice 响应失败: {e}")
 
+    def _get_voice_list(self, page_size: int = 10, page_index: int = 0):
+        """
+        查询已创建的音色列表
+
+        :param page_size: 每页数量
+        :param page_index: 页码，从 0 开始
+        :return: voice_list (list[dict])
+        """
+        # 选择 API Key
+        if self.region == "cn":
+            api_key = self.config["CN_API_KEY"]
+        else:
+            api_key = self.config["INTL_API_KEY"]
+
+        if not api_key:
+            raise RuntimeError("未配置 API KEY")
+
+        payload = {
+            "model": "qwen-voice-enrollment",  # 固定值
+            "input": {
+                "action": "list",
+                "page_size": page_size,
+                "page_index": page_index
+            }
+        }
+
+        headers = {
+            "Authorization": f"Bearer {api_key}",
+            "Content-Type": "application/json"
+        }
+
+        resp = requests.post(self.customize_url, json=payload, headers=headers)
+
+        if resp.status_code != 200:
+            raise RuntimeError(
+                f"查询 voice list 失败: {resp.status_code}, {resp.text}"
+            )
+
+        try:
+            data = resp.json()
+            return data["output"]["voice_list"]
+        except (KeyError, ValueError) as e:
+            raise RuntimeError(f"解析 voice list 响应失败: {e}")
+
+    def _delete_voice(self, voice: str):
+        """
+        删除指定音色
+
+        :param voice: 要删除的音色 ID（如 voice_xxx）
+        """
+        if not voice:
+            raise ValueError("voice 不能为空")
+
+        # 选择 API Key
+        if self.region == "cn":
+            api_key = self.config["CN_API_KEY"]
+        else:
+            api_key = self.config["INTL_API_KEY"]
+
+        if not api_key:
+            raise RuntimeError("未配置 API KEY")
+
+        payload = {
+            "model": "qwen-voice-enrollment",  # 固定值
+            "input": {
+                "action": "delete",
+                "voice": voice
+            }
+        }
+
+        headers = {
+            "Authorization": f"Bearer {api_key}",
+            "Content-Type": "application/json"
+        }
+
+        resp = requests.post(self.customize_url, json=payload, headers=headers)
+
+        if resp.status_code != 200:
+            raise RuntimeError(
+                f"删除 voice 失败: {resp.status_code}, {resp.text}"
+            )
+
+        try:
+            data = resp.json()
+            return {
+                "request_id": data.get("request_id"),
+                "voice": voice,
+                "status": "deleted"
+            }
+        except (ValueError, KeyError) as e:
+            raise RuntimeError(f"解析删除 voice 响应失败: {e}")
 
 
 # ======= 回调类 =======
@@ -285,6 +486,7 @@ if __name__ == "__main__":
     '''
     api = QWenAPI()
     api.setup_model("qwen3-tts-vc-realtime-2025-11-27")
+    # api._delete_all_voices()  # 删除所有音色
 
     out_pcm = pathlib.Path("result/test_out.pcm")
 

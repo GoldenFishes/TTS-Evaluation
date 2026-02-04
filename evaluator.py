@@ -12,6 +12,15 @@ QPM测试候选API入口函数： TTSEvaluator.qpm_test()
     QPM测试时务必设置 TTSEvaluator初始化任务为 text_task_support=["short_prompt"]
     以保证获取到用于QPM测试的单个样本本身耗时足够短。
 
+稳定性测试候选API入口函数： TTSEvaluator.stability_test()
+    稳定性测试是设置 TTSEvaluator初始化任务为 text_task_support=["neutral_prompt"]
+    使用自然样本进行测试
+    - 确保传入的 concurrency 和 qpm 是小于前面实验测出的最大负载上限的
+    - 设置allow_overlap模式:
+        True为允许上一轮请求未结束的时候进行下一轮请求，优先满足设置的QPM，此时长样本可能会出现同时活跃数>concurrency
+        False为不允许请求重叠，优先满足同时活跃数≤concurrency，此时长样本可能会出现实际运行时每分钟没有发送足够QPM设置值的请求
+    - 设置测试时长，建议先80s预测试，正式测试180s
+
 '''
 import apis  # 触发 apis.__init__ 的 auto_import_apis() ; 如果不这么做，API适配器将无法正常向router注册
 import yaml
@@ -27,6 +36,8 @@ from dataclasses import dataclass, asdict, field
 
 from base.data_collector import TTSEvalDataCollector  # 用于获取数据集路径
 from base.router import Router  # 用于返回不同API调用类的路由器（每个API调用类都继承自APIBase基类）
+
+import matplotlib.pyplot as plt
 
 class TTSStreamMetrics:
     '''
@@ -478,7 +489,7 @@ class TTSEvaluator:
         try:
             last_chunk_ts = None  # 上一个 chunk 的到达时间
             audio_bytes = 0  # 累计返回的音频字节数
-            first_chunk_ts = None
+            ttfb = None
 
             # 遍历 TTS 接口返回的音频 chunk
             for chunk, sr, ch, bd, call_start_ts in api_adapter.voice_clone(
@@ -486,10 +497,11 @@ class TTSEvaluator:
                     reference_audio=voice_prompt.wav_path,
                     reference_text=voice_prompt.text,
             ):
-                print(f"[返回Chunk] {time.perf_counter()}")
+                # print(f"[返回Chunk] {time.perf_counter()}")
                 now = time.perf_counter()  # 当前 chunk 到达时间
-                if first_chunk_ts is None:
-                    first_chunk_ts = now
+                if ttfb is None:
+                    ttfb = now - call_start_ts
+                    # print(f"[request] ttfb: {ttfb:.4f}s")
                 audio_bytes_chunk = len(chunk)  # 当前 chunk 的字节数
                 audio_duration_chunk = audio_bytes_chunk / (sr * ch * (bd // 8))   # 根据采样率 / 通道数 / 位深计算 chunk 对应音频时长
 
@@ -521,29 +533,37 @@ class TTSEvaluator:
                 success=True,
                 start_ts=call_start_ts - state.start_time,
                 end_ts=last_chunk_ts - state.start_time,
-                ttfb=first_chunk_ts - call_start_ts if first_chunk_ts else None,
+                ttfb=ttfb,
                 total_time=total_time,
                 audio_duration=total_audio_duration,
                 rtf=total_rtf,
             )
 
         except Exception as e:
+            now = time.perf_counter()
             print("[Exception]:\n", e)
-            # 构造失败的请求指标
+            # 构造失败的请求指标，补充时间
             req_metrics = ConcurrencyRequestMetrics(
                 success=False,
+                start_ts=now - state.start_time,  # 补 start_ts
+                end_ts=now - state.start_time,  # 补 end_ts
                 ttfb=None,
                 total_time=None,
                 audio_duration=None,
                 rtf=None,
                 error=str(e),
             )
-            # 标记测试过程中出现错误
             with state.lock:
                 state.stop_ramp = True
 
         finally:
-            # 无论成功或失败，更新全局状态
+            now = time.perf_counter()
+            # 如果失败请求没有时间戳，保底赋值
+            if req_metrics.start_ts is None:
+                req_metrics.start_ts = now - state.start_time
+            if req_metrics.end_ts is None:
+                req_metrics.end_ts = now - state.start_time
+
             with state.lock:
                 state.metrics.append(req_metrics)
                 state.active_requests -= 1
@@ -589,8 +609,6 @@ class TTSEvaluator:
             - 红色实线：chunk 级 RTF
             - 灰色虚线：RTF = 1 临界线
         """
-        import matplotlib.pyplot as plt
-
         if not chunk_stats:
             return
 
@@ -844,8 +862,6 @@ class TTSEvaluator:
             - 橙色实线：chunk 级 RTF
             - 灰色虚线：RTF = 1 实时生成临界线
         """
-        import matplotlib.pyplot as plt
-
         if not chunk_stats:
             return
 
@@ -934,6 +950,413 @@ class TTSEvaluator:
         plt.savefig(save_path)
         plt.close()
 
+    # -----------------------------------------------------------------------------------------------------------
+    # 用于测试稳定性的方法
+    def stability_test(self, concurrency:int, qpm:int, allow_overlap:bool, test_duration:int):
+        '''
+        稳定性测试（SLA Test），
+        固定并发上限 concurrency 固定发送速率 qpm 。 测试时长 3 分钟 并 统计每个请求是否成功（success rate 是核心指标）
+
+        如果允许请求重叠，则优先根据每次发送 concurrency 数量的请求来计算一分钟内均匀发送满 qpm 的时间节点：
+            每两次发送之间允许上一次发送的请求未结束的情况下发送下一轮请求。
+
+        如果不允许请求重叠，则优先保证同时活跃的请求数量不超过 concurrency。
+            在每次发送窗口时判断过去1分钟的发送的请求是否达到QPM，未达到则补充，已达到等待。
+        '''
+
+        for api_name, model_name_list in self.api_and_model_names.items():
+            for model_name in model_name_list:
+                print(f"Evaluating API={api_name} Model={model_name} Stability Test")
+
+                summary, success_metrics = self.single_api_stability_test(
+                    api_name=api_name,
+                    model_name=model_name,
+                    concurrency=concurrency,
+                    qpm=qpm,
+                    allow_overlap=allow_overlap,
+                    test_duration=test_duration
+                )
+
+                out_dir = pathlib.Path(self.output_dir) / f"{api_name}_{model_name}"
+                out_dir.mkdir(parents=True, exist_ok=True)
+
+                # 保存 YAML
+                yaml_path = out_dir / "results_stability_summary.yaml"
+                with open(yaml_path, "w", encoding="utf-8") as f:
+                    yaml.safe_dump(summary, f, allow_unicode=True)
+
+                # 画图
+                self._plot_stability_rtf_and_failures(
+                    summary["chunk_stats"],
+                    summary["failed_metrics"],
+                    summary["success_metrics"],
+                    out_dir / "stability_rtf.png",
+                )
+
+                self._plot_stability_ttfb_and_failures(
+                    summary["chunk_stats"],
+                    summary["failed_metrics"],
+                    summary["success_metrics"],
+                    out_dir / "stability_ttfb.png",
+                )
+
+    def single_api_stability_test(
+        self,
+        api_name: str,
+        model_name: str,
+        concurrency: int,
+        qpm: int,
+        allow_overlap: bool,
+        test_duration = 180  # 默认180s
+    ):
+        """
+        单 API / 单 Model 稳定性测试（SLA 模型）
+        - 滑动 60 秒窗口控制 QPM
+        - 每条请求间隔 >= 60 / QPM 秒
+        - 固定并发上限
+        - 每 5 秒打印日志
+        """
+        import time
+        import threading
+
+        api_adapter = self.router.get_api_adapter(api_name)
+        api_adapter.setup_model(model_name)
+
+        # ---------- 固定样本 ----------
+        task_name, txt_prompts = next(iter(self.text_tasks.items()))
+        text_sample = txt_prompts[0]
+        text_sample.text = ["".join(text_sample.text)]
+
+        voice_type, voice_list = next(iter(self.voice_prompts.items()))
+        voice_prompt = voice_list[0]
+
+        # ---------- 状态 ----------
+        state = ConcurrencyState()
+        state.start_time = time.perf_counter()
+        threads: list[threading.Thread] = []
+
+        start_ts = time.perf_counter()
+        end_ts = start_ts + test_duration
+
+        # ---------- 滑动窗口 QPM ----------
+        request_timestamps = []
+
+        # 打印日志
+        log_interval = 5.0
+        last_log_ts = start_ts
+
+        request_interval_min = 60.0 / qpm  # 每条请求最小间隔
+
+        while True:
+            now = time.perf_counter()
+            elapsed = now - start_ts
+            if elapsed >= test_duration:
+                break
+
+            # ---------- 每 5 秒打印一次运行状态 ----------
+            if now - last_log_ts >= log_interval:
+                with state.lock:
+                    active = state.active_requests
+                    started = state.total_started
+                    finished = state.total_finished
+                    success = sum(1 for m in state.metrics if m.success)
+                    failed = finished - success
+
+                approx_qpm = success / (elapsed / 60.0) if elapsed > 0 else 0.0
+
+                mode = "allow quest overlap" if allow_overlap else "strict"
+                print(
+                    f"[{elapsed:6.1f}s][{mode}] act={active}/{concurrency} "
+                    f"started={started} fin={finished} succ={success} fail={failed} "
+                    f"qpm≈{approx_qpm:.1f} window_req={len(request_timestamps)}"
+                )
+                last_log_ts = now
+
+            # ---------- 清理滑动窗口中过期请求 ----------
+            request_timestamps = [t for t in request_timestamps if t > now - 60.0]
+
+            # ---------- 滑动窗口 QPM 已满 ----------
+            if len(request_timestamps) >= qpm:
+                time.sleep(0.05)
+                continue
+
+            # ---------- 请求间隔控制 ----------
+            if request_timestamps:
+                last_req_ts = request_timestamps[-1]
+                sleep_needed = request_interval_min - (now - last_req_ts)
+                if sleep_needed > 0:
+                    time.sleep(min(sleep_needed, 0.05))
+                    continue
+
+            # ---------- 并发控制 ----------
+            with state.lock:
+                if not allow_overlap and state.active_requests >= concurrency:
+                    time.sleep(0.05)
+                    continue
+
+                # 发起请求
+                t = threading.Thread(
+                    target=self._run_single_request_chunk_stats,
+                    args=(api_adapter, text_sample, voice_prompt, state),
+                    daemon=True,
+                )
+                t.start()
+                threads.append(t)
+                state.total_started += 1
+                request_timestamps.append(now)
+
+            # 循环小 sleep 保证调度，不空转
+            time.sleep(0.001)
+
+        # ---------- drain ----------
+        for t in threads:
+            t.join(timeout=300)
+
+        with state.lock:
+            state.test_finished = True
+
+        # ---------- 汇总 ----------
+        success_metrics = [m for m in state.metrics if m.success]
+        failed_metrics = [m for m in state.metrics if not m.success]
+        total_success = len(success_metrics)
+        total_finished = state.total_finished
+
+        # 把 ConcurrencyRequestMetrics 对象转成 dict，便于 YAML 序列化
+        def metrics_to_dict(metrics_list):
+            return [
+                {
+                    "success": m.success,
+                    "start_ts": m.start_ts,
+                    "end_ts": m.end_ts,
+                    "ttfb": m.ttfb,
+                    "total_time": m.total_time,
+                    "audio_duration": m.audio_duration,
+                    "rtf": m.rtf,
+                    "error": m.error,
+                }
+                for m in metrics_list
+            ]
+
+        summary = {
+            "api_name": api_name,
+            "model_name": model_name,
+            "test_mode": "stability_test",
+            "concurrency": concurrency,
+            "target_qpm": qpm,
+            "test_duration_sec": test_duration,
+            "total_started": state.total_started,
+            "total_finished": total_finished,
+            "total_success": total_success,
+            "total_failed": len(failed_metrics),
+            "success_rate": total_success / total_finished if total_finished > 0 else None,
+            "actual_qpm": total_success / (test_duration / 60.0),
+            "avg_ttfb": sum(m.ttfb for m in success_metrics) / total_success if total_success else None,
+            "avg_rtf": sum(m.rtf for m in success_metrics) / total_success if total_success else None,
+            "error_list": [m.error for m in failed_metrics],
+            "chunk_stats": list(state.chunk_stats),
+            "metrics": metrics_to_dict(state.metrics),
+            "failed_metrics": metrics_to_dict(failed_metrics),
+            "success_metrics": metrics_to_dict(success_metrics),
+        }
+
+        return summary, success_metrics
+
+    def _plot_stability_rtf_and_failures(
+            self,
+            chunk_stats: list[dict],
+            failed_metrics: list[dict],
+            success_metrics: list[dict],
+            save_path: pathlib.Path,
+    ):
+        """
+        可视化：
+        - 左轴：每个 chunk 的 RTF
+        - 右轴：累计失败请求数 + 滑动窗口成功 QPM（过去1分钟）
+        """
+        import matplotlib.pyplot as plt
+        import numpy as np
+
+        if not chunk_stats:
+            print("No chunk stats to plot.")
+            return
+
+        ts = [s["ts"] for s in chunk_stats]
+        rtf = [s["rtf"] for s in chunk_stats]
+
+        # ---------- 失败请求时间 ----------
+        fail_ts = sorted([m["end_ts"] for m in failed_metrics if m["end_ts"] is not None])
+        cumulative_fail = np.zeros(len(ts), dtype=int)
+        fail_idx = 0
+        for i, t in enumerate(ts):
+            while fail_idx < len(fail_ts) and fail_ts[fail_idx] <= t:
+                fail_idx += 1
+            cumulative_fail[i] = fail_idx
+
+        # ---------- 成功 QPM (滑动1分钟窗口) ----------
+        # 将成功请求按 start_ts 排序
+        success_start_ts = sorted([m["start_ts"] for m in success_metrics if m["start_ts"] is not None])
+        success_qpm = np.zeros(len(ts), dtype=float)
+        window_sec = 60.0
+
+        for i, t in enumerate(ts):
+            # 统计过去60秒内发起的成功请求数
+            count = sum(1 for s_ts in success_start_ts if t - window_sec <= s_ts <= t)
+            success_qpm[i] = count * (60.0 / window_sec)  # 换算为 QPM
+
+        # ---------- 绘图 ----------
+        fig, ax1 = plt.subplots(figsize=(12, 5))
+
+        # 左轴：Chunk RTF
+        ax1.set_xlabel("Time (s)")
+        ax1.set_ylabel("Chunk RTF")
+        ax1.plot(ts, rtf, color="#FFA500", linewidth=1.6, alpha=0.9, label="Chunk RTF")
+        ax1.axhline(1.0, color="#808080", linestyle="--", linewidth=1.2, alpha=0.7, label="RTF = 1.0")
+
+        # 右轴：累计失败请求 + 成功 QPM
+        ax2 = ax1.twinx()
+        ax2.set_ylabel("Failed Requests / Success QPM")
+        ax2.plot(ts, cumulative_fail, color="#FF0000", linewidth=2.0, alpha=0.9, label="Failed Requests")
+        ax2.plot(ts, success_qpm, color="#008000", linewidth=2.0, alpha=0.9, label="Success QPM (1min)")
+
+        # Legend
+        lines1, labels1 = ax1.get_legend_handles_labels()
+        lines2, labels2 = ax2.get_legend_handles_labels()
+        fig.legend(lines1 + lines2, labels1 + labels2, loc="upper left")
+
+        plt.title("Stability Test: Chunk RTF vs Failures & Success QPM (Sliding 1min)")
+        plt.tight_layout()
+        plt.savefig(save_path)
+        plt.close()
+
+    def _plot_stability_ttfb_and_failures(
+            self,
+            chunk_stats: list[dict],
+            failed_metrics: list[dict],
+            success_metrics: list[dict],
+            save_path: pathlib.Path,
+    ):
+        """
+        稳定性测试可视化（TTFB 视角）
+
+        左轴：
+            - 每个成功请求的 TTFB（scatter）
+            - SLA 参考线（可选）
+
+        右轴：
+            - 累计失败请求数
+            - 成功 QPM（滑动 1 分钟）
+        """
+        import matplotlib.pyplot as plt
+        import numpy as np
+
+        if not success_metrics:
+            print("No success metrics to plot TTFB.")
+            return
+
+        # ---------- 成功请求 TTFB ----------
+        ttfb_ts = [
+            m["start_ts"]
+            for m in success_metrics
+            if m["start_ts"] is not None and m["ttfb"] is not None
+        ]
+        ttfb_values = [
+            m["ttfb"]
+            for m in success_metrics
+            if m["start_ts"] is not None and m["ttfb"] is not None
+        ]
+
+        if not ttfb_ts:
+            print("No valid TTFB data.")
+            return
+
+        # ---------- 失败请求 ----------
+        fail_ts = sorted(
+            m["end_ts"]
+            for m in failed_metrics
+            if m["end_ts"] is not None
+        )
+
+        # 时间轴（统一用 chunk_stats 的 ts，保证对齐）
+        ts = [s["ts"] for s in chunk_stats]
+        if not ts:
+            return
+
+        # 累计失败数
+        cumulative_fail = np.zeros(len(ts), dtype=int)
+        fail_idx = 0
+        for i, t in enumerate(ts):
+            while fail_idx < len(fail_ts) and fail_ts[fail_idx] <= t:
+                fail_idx += 1
+            cumulative_fail[i] = fail_idx
+
+        # ---------- 成功 QPM（滑动 1 分钟） ----------
+        window_sec = 60.0
+        success_start_ts = sorted(ttfb_ts)
+
+        success_qpm = np.zeros(len(ts), dtype=float)
+        for i, t in enumerate(ts):
+            count = sum(1 for s_ts in success_start_ts if t - window_sec <= s_ts <= t)
+            success_qpm[i] = count * (60.0 / window_sec)
+
+        # ---------- 绘图 ----------
+        fig, ax1 = plt.subplots(figsize=(12, 5))
+
+        # 左轴：TTFB
+        ax1.set_xlabel("Time (s)")
+        ax1.set_ylabel("TTFB (s)")
+
+        ax1.scatter(
+            ttfb_ts,
+            ttfb_values,
+            color="#1f77b4",
+            alpha=0.7,
+            s=20,
+            label="TTFB (per request)",
+        )
+
+        # SLA 参考线（可选，按需调整）
+        ax1.axhline(
+            1.0,
+            color="#808080",
+            linestyle="--",
+            linewidth=1.2,
+            alpha=0.7,
+            label="TTFB = 1.0s",
+        )
+
+        # 右轴：失败 & QPM
+        ax2 = ax1.twinx()
+        ax2.set_ylabel("Failed Requests / Success QPM")
+
+        ax2.plot(
+            ts,
+            cumulative_fail,
+            color="#FF0000",
+            linewidth=2.0,
+            alpha=0.9,
+            label="Failed Requests",
+        )
+
+        ax2.plot(
+            ts,
+            success_qpm,
+            color="#008000",
+            linewidth=2.0,
+            alpha=0.9,
+            label="Success QPM (1min)",
+        )
+
+        # Legend
+        lines1, labels1 = ax1.get_legend_handles_labels()
+        lines2, labels2 = ax2.get_legend_handles_labels()
+        fig.legend(lines1 + lines2, labels1 + labels2, loc="upper left")
+
+        plt.title("Stability Test: TTFB vs Failures & Success QPM (Sliding 1min)")
+        plt.tight_layout()
+        plt.savefig(save_path)
+        plt.close()
+
+
 
 if __name__ == "__main__":
     '''
@@ -942,12 +1365,13 @@ if __name__ == "__main__":
     TTSEvaluator.evaluate_all() 一般效果评测，指定voice clone的任务与音色，自动遍历进行
     TTSEvaluator.concurrency_test() 并发测试，指定voice clone的任务text_task_support为["long_stream_prompt"]，使用其中用于流式生成的样本进行并发测试
     TTSEvaluator.qpm_test() QPM测试，指定voice clone的任务text_task_support为["short_prompt"]，使用其中的短样本进行QPM上限的测试
+    TTSEvaluator.stability_test() 稳定性测试，指定voice clone的任务text_task_support为["neutral_prompt"]，使用自然样本进行稳定性测试
     '''
     # API名称与具体模型名称的配置, 测试工具会自动遍历所有配置
     api_and_model_names = {
         # "qwen": ["qwen3-tts-vc-realtime-2025-11-27"],
         # "fishaudio": ["s1"],
-        # "minimax": ["speech-2.6-turbo"],  # "speech-2.6-turbo", "speech-02-hd"
+        # "minimax": ["speech-02-hd"],  # "speech-2.6-turbo", "speech-02-hd"
         "inworld": ["inworld-tts-1-max"]
     }
 
@@ -955,14 +1379,15 @@ if __name__ == "__main__":
         api_and_model_names=api_and_model_names,
         output_dir="result",
         # text_task_support=["hardcase_prompt"],  # "emotion_prompt", "hardcase_prompt", "mixed-lingual_in-context_prompt"
-        text_task_support=["long_stream_prompt"],  # 测试流式生成时 / 并发测试时的长样本
+        # text_task_support=["long_stream_prompt"],  # 测试流式生成时 / 并发测试时的长样本
         # text_task_support=["short_prompt"],  # 测试QPM时的短样本
+        text_task_support=["neutral_prompt"],  # 测试稳定性时使用的样本
         voice_task_support=["base_voice_prompt"],
     )
 
     # 一般效果评测
-    evaluator.evaluate_all()
-    
+    # evaluator.evaluate_all()
+
     # 并发测试
     # evaluator.concurrency_test(single_chunk_mode=False)  # 使用并发测试时，任务必须选择 text_task_support=["long_stream_prompt"]，保证样本生成的正常长度大于1分钟
     '''
@@ -975,8 +1400,19 @@ if __name__ == "__main__":
     '''
 
     # QPM 测试
-    # evaluator.qpm_test(max_concurrency=7)  # 测试QPM时，任务必须选择 text_task_support=["short_prompt"]，且max_concurrency设置为并发测试时得到的最大并发数。
+    # evaluator.qpm_test(max_concurrency=32)  # 测试QPM时，任务必须选择 text_task_support=["short_prompt"]，且max_concurrency设置为并发测试时得到的最大并发数。
     '''
     1. 确保初始化 TTSEvaluator() 中任务 text_task_support 为 ["short_prompt"]
     2. 确保执行 TTSEvaluator.qpm_test() 的 max_concurrency 是前面实验测试出的该模型最大并发数
+    '''
+
+    # 稳定性测试
+    evaluator.stability_test(concurrency=1, qpm=10, allow_overlap=False, test_duration=80)
+    '''
+    1. 确保初始化 TTSEvaluator() 中任务 text_task_support 为 ["neutral_prompt"]
+    2. 确保传入的 concurrency 和 qpm 是小于前面实验测出的最大负载上限的
+    3. 设置allow_overlap模式:
+        True为允许上一轮请求未结束的时候进行下一轮请求，优先满足设置的QPM，此时长样本可能会出现同时活跃数>concurrency
+        False为不允许请求重叠，优先满足同时活跃数≤concurrency，此时长样本可能会出现实际运行时每分钟没有发送足够QPM设置值的请求
+    4. 设置测试时长，建议开始80s测试，正式测试180s
     '''
