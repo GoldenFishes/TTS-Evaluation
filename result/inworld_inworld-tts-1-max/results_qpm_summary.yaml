@@ -1,0 +1,508 @@
+api_name: inworld
+avg_rtf: 7.746532429892779
+avg_ttfb: 7.994553402038909
+chunk_stats:
+- audio_duration: 1.0
+  concurrency: 31
+  rtf: 4.794659699982731
+  ts: 12.503391400008695
+- audio_duration: 1.08
+  concurrency: 31
+  rtf: 6.790931388887757
+  ts: 14.825792400020873
+- audio_duration: 1.815
+  concurrency: 31
+  rtf: 3.820370909079304
+  ts: 15.025910299998941
+- audio_duration: 0.125
+  concurrency: 31
+  rtf: 0.5199672000017017
+  ts: 15.090906199999154
+- audio_duration: 1.88
+  concurrency: 31
+  rtf: 4.386097606394732
+  ts: 15.184681800019462
+- audio_duration: 1.42
+  concurrency: 31
+  rtf: 5.614752464777705
+  ts: 15.37103360000765
+- audio_duration: 0.66
+  concurrency: 30
+  rtf: 13.072728636369433
+  ts: 15.421002600021893
+- audio_duration: 0.8
+  concurrency: 31
+  rtf: 8.904607124968607
+  ts: 15.450800899998285
+- audio_duration: 0.86
+  concurrency: 31
+  rtf: 8.91063348836872
+  ts: 15.895300100004533
+- audio_duration: 0.5
+  concurrency: 31
+  rtf: 15.98425939999288
+  ts: 16.146000700013246
+- audio_duration: 1.215
+  concurrency: 31
+  rtf: 7.836803786002421
+  ts: 16.599369300005492
+- audio_duration: 0.52
+  concurrency: 31
+  rtf: 12.851594423073738
+  ts: 16.611875600006897
+- audio_duration: 0.385
+  concurrency: 31
+  rtf: 0.2026233766167485
+  ts: 16.67737930000294
+- audio_duration: 1.215
+  concurrency: 31
+  rtf: 7.554028724289571
+  ts: 17.255226600012975
+- audio_duration: 0.285
+  concurrency: 31
+  rtf: 0.45772175439388346
+  ts: 17.38567730001523
+- audio_duration: 0.58
+  concurrency: 31
+  rtf: 17.39679241376319
+  ts: 17.602541900007054
+- audio_duration: 0.62
+  concurrency: 30
+  rtf: 16.49048741936924
+  ts: 17.642930600006366
+- audio_duration: 2.82
+  concurrency: 31
+  rtf: 3.671081950359628
+  ts: 17.79218860002584
+- audio_duration: 1.815
+  concurrency: 31
+  rtf: 4.750251900818399
+  ts: 18.26867220000713
+- audio_duration: 0.405
+  concurrency: 31
+  rtf: 0.005266913586514599
+  ts: 18.27080530000967
+- audio_duration: 1.1
+  concurrency: 31
+  rtf: 7.060717999993357
+  ts: 18.568190899997717
+- audio_duration: 1.52
+  concurrency: 31
+  rtf: 6.380092828955017
+  ts: 18.732768800022313
+- audio_duration: 1.215
+  concurrency: 31
+  rtf: 8.834735390949618
+  ts: 19.18346020000172
+- audio_duration: 0.125
+  concurrency: 31
+  rtf: 0.3191552001517266
+  ts: 19.223354600020684
+- audio_duration: 1.42
+  concurrency: 31
+  rtf: 6.758065563384739
+  ts: 19.295499800005928
+- audio_duration: 3.015
+  concurrency: 31
+  rtf: 3.4656578441116506
+  ts: 20.772741000022506
+- audio_duration: 0.145
+  concurrency: 31
+  rtf: 0.04528275859574306
+  ts: 20.77930700001889
+- audio_duration: 1.36
+  concurrency: 31
+  rtf: 5.458066911759327
+  ts: 24.63792020000983
+- audio_duration: 0.56
+  concurrency: 31
+  rtf: 16.926565892884224
+  ts: 27.12681060002069
+- audio_duration: 0.76
+  concurrency: 31
+  rtf: 9.211843552666801
+  ts: 27.496387400024105
+- audio_duration: 1.06
+  concurrency: 31
+  rtf: 8.585380188673778
+  ts: 28.203504000004614
+- audio_duration: 0.88
+  concurrency: 30
+  rtf: 8.261113409091855
+  ts: 28.465129200019874
+- audio_duration: 1.48
+  concurrency: 31
+  rtf: 5.099943310798719
+  ts: 28.661827300005825
+- audio_duration: 1.18
+  concurrency: 31
+  rtf: 5.884857372882958
+  ts: 30.18099190000794
+- audio_duration: 0.98
+  concurrency: 31
+  rtf: 7.843938469381918
+  ts: 30.61700060000294
+- audio_duration: 0.58
+  concurrency: 31
+  rtf: 11.689047758610005
+  ts: 30.786197100009304
+- audio_duration: 0.56
+  concurrency: 31
+  rtf: 18.795704285678635
+  ts: 31.27143100000103
+- audio_duration: 1.12
+  concurrency: 31
+  rtf: 6.7975891964514235
+  ts: 31.555684400023893
+- audio_duration: 0.5
+  concurrency: 31
+  rtf: 18.120188200031407
+  ts: 31.74835570002324
+- audio_duration: 1.12
+  concurrency: 31
+  rtf: 6.5772349107127015
+  ts: 32.125029800023185
+- audio_duration: 1.0
+  concurrency: 31
+  rtf: 6.97772939997958
+  ts: 33.39551770000253
+- audio_duration: 1.38
+  concurrency: 31
+  rtf: 4.928066521740445
+  ts: 34.080105900007766
+- audio_duration: 1.32
+  concurrency: 30
+  rtf: 6.637791439403151
+  ts: 34.12330050001037
+- audio_duration: 2.415
+  concurrency: 31
+  rtf: 3.7141755279433175
+  ts: 34.45740549999755
+- audio_duration: 0.445
+  concurrency: 31
+  rtf: 0.004331235972683082
+  ts: 34.45933290000539
+- audio_duration: 2.14
+  concurrency: 31
+  rtf: 3.8148903270947274
+  ts: 34.71529150000424
+- audio_duration: 0.88
+  concurrency: 31
+  rtf: 9.798062499976368
+  ts: 35.76518230000511
+- audio_duration: 3.015
+  concurrency: 31
+  rtf: 2.696154958533376
+  ts: 36.385610900004394
+- audio_duration: 0.165
+  concurrency: 31
+  rtf: 0.002293333333606521
+  ts: 36.38598930000444
+- audio_duration: 0.74
+  concurrency: 30
+  rtf: 13.459829729706414
+  ts: 36.412805800006026
+- audio_duration: 2.88
+  concurrency: 31
+  rtf: 4.118885659722259
+  ts: 37.795831800001906
+- audio_duration: 2.6
+  concurrency: 31
+  rtf: 3.5628202692336903
+  ts: 39.36903080000775
+- audio_duration: 1.58
+  concurrency: 31
+  rtf: 5.477740316463139
+  ts: 40.627043000014964
+- audio_duration: 0.64
+  concurrency: 31
+  rtf: 13.542455781225726
+  ts: 43.31326190000982
+- audio_duration: 1.16
+  concurrency: 31
+  rtf: 7.362303965532318
+  ts: 44.61864300002344
+- audio_duration: 1.12
+  concurrency: 31
+  rtf: 6.369048749989555
+  ts: 45.439362900011474
+- audio_duration: 0.5
+  concurrency: 31
+  rtf: 12.585159000009298
+  ts: 45.74750250001671
+- audio_duration: 1.18
+  concurrency: 30
+  rtf: 6.224942288136552
+  ts: 45.7766263000085
+- audio_duration: 1.5
+  concurrency: 31
+  rtf: 5.16878480000499
+  ts: 45.85085450002225
+- audio_duration: 1.18
+  concurrency: 30
+  rtf: 6.179086864413891
+  ts: 45.894295200007036
+- audio_duration: 0.72
+  concurrency: 31
+  rtf: 11.034214722248079
+  ts: 46.228526200022316
+- audio_duration: 0.58
+  concurrency: 31
+  rtf: 17.03109189653207
+  ts: 46.32854300001054
+- audio_duration: 1.72
+  concurrency: 31
+  rtf: 6.0351236046530135
+  ts: 46.60690010001417
+- audio_duration: 1.5
+  concurrency: 31
+  rtf: 5.356124266671638
+  ts: 47.44111490002251
+- audio_duration: 1.06
+  concurrency: 31
+  rtf: 9.924392547169568
+  ts: 47.996853700024076
+- audio_duration: 2.04
+  concurrency: 31
+  rtf: 3.553133823523097
+  ts: 49.056323099997826
+- audio_duration: 0.72
+  concurrency: 31
+  rtf: 11.883434861132022
+  ts: 50.022156700026244
+- audio_duration: 2.78
+  concurrency: 31
+  rtf: 4.5982735251723925
+  ts: 50.82171109999763
+- audio_duration: 0.82
+  concurrency: 30
+  rtf: 8.000696341438992
+  ts: 50.925399100000504
+- audio_duration: 0.74
+  concurrency: 31
+  rtf: 13.19998175675062
+  ts: 51.451242600014666
+- audio_duration: 3.52
+  concurrency: 31
+  rtf: 2.364037840908912
+  ts: 52.74854490000871
+- audio_duration: 1.215
+  concurrency: 31
+  rtf: 6.063405843619295
+  ts: 53.08061040000757
+- audio_duration: 0.305
+  concurrency: 31
+  rtf: 0.21106918031334512
+  ts: 53.14498650000314
+- audio_duration: 0.86
+  concurrency: 31
+  rtf: 8.659343139524301
+  ts: 54.0161070000031
+- audio_duration: 0.98
+  concurrency: 31
+  rtf: 9.91706479592035
+  ts: 54.29986280002049
+- audio_duration: 1.09
+  concurrency: 31
+  rtf: 5.038705045878545
+  ts: 57.09820990002481
+- audio_duration: 1.325
+  concurrency: 31
+  rtf: 0.16344460375378578
+  ts: 57.31477399999858
+- audio_duration: 1.215
+  concurrency: 31
+  rtf: 5.3609093827235705
+  ts: 57.469750000018394
+- audio_duration: 0.305
+  concurrency: 31
+  rtf: 0.5288367213101172
+  ts: 57.476069199998165
+- audio_duration: 0.245
+  concurrency: 30
+  rtf: 0.22857999999304207
+  ts: 57.52575210001669
+- audio_duration: 1.28
+  concurrency: 30
+  rtf: 6.085854062484941
+  ts: 58.821329099999275
+- audio_duration: 1.08
+  concurrency: 31
+  rtf: 5.892270277777074
+  ts: 59.57078629999887
+- audio_duration: 1.06
+  concurrency: 31
+  rtf: 8.986320188664392
+  ts: 62.59794669999974
+- audio_duration: 1.8
+  concurrency: 30
+  rtf: 4.221682222220504
+  ts: 63.270031899999594
+- audio_duration: 2.42
+  concurrency: 29
+  rtf: 3.7010079338855095
+  ts: 63.58053780000773
+- audio_duration: 0.56
+  concurrency: 27
+  rtf: 19.336699107173313
+  ts: 64.35488280002028
+- audio_duration: 1.215
+  concurrency: 26
+  rtf: 7.419610041152463
+  ts: 64.77513840000029
+- audio_duration: 0.045
+  concurrency: 26
+  rtf: 0.9567755559045408
+  ts: 64.81819330001599
+- audio_duration: 0.74
+  concurrency: 25
+  rtf: 9.35925499998612
+  ts: 64.90639119999832
+- audio_duration: 0.8
+  concurrency: 22
+  rtf: 10.003224499996577
+  ts: 65.53469020000193
+- audio_duration: 1.58
+  concurrency: 21
+  rtf: 5.326256012640557
+  ts: 66.09232789999805
+- audio_duration: 0.8
+  concurrency: 20
+  rtf: 8.445350750007492
+  ts: 66.97723750001751
+- audio_duration: 0.94
+  concurrency: 19
+  rtf: 8.145174042549618
+  ts: 67.07188689999748
+- audio_duration: 1.48
+  concurrency: 18
+  rtf: 5.305941554055411
+  ts: 67.23295780000626
+- audio_duration: 1.42
+  concurrency: 17
+  rtf: 5.792713591551841
+  ts: 67.32507620000979
+- audio_duration: 1.215
+  concurrency: 16
+  rtf: 8.691054485583056
+  ts: 67.38588270000764
+- audio_duration: 0.145
+  concurrency: 16
+  rtf: 0.35092344824706434
+  ts: 67.43676660000347
+- audio_duration: 0.58
+  concurrency: 15
+  rtf: 13.280234310388614
+  ts: 67.5774632000248
+- audio_duration: 0.68
+  concurrency: 14
+  rtf: 10.802458235326304
+  ts: 67.72705470002256
+- audio_duration: 1.8
+  concurrency: 13
+  rtf: 3.3183150555608636
+  ts: 68.60482760000741
+- audio_duration: 1.12
+  concurrency: 12
+  rtf: 9.713976517871611
+  ts: 68.7218912000244
+- audio_duration: 0.76
+  concurrency: 11
+  rtf: 8.87506421051129
+  ts: 69.03256110000075
+- audio_duration: 0.66
+  concurrency: 10
+  rtf: 8.946349696965296
+  ts: 69.46889400001965
+- audio_duration: 2.42
+  concurrency: 9
+  rtf: 2.000038429754613
+  ts: 69.63803890001145
+- audio_duration: 0.64
+  concurrency: 8
+  rtf: 9.71707015623906
+  ts: 69.69323150001583
+- audio_duration: 0.84
+  concurrency: 7
+  rtf: 5.741071428582516
+  ts: 69.81514610000886
+- audio_duration: 0.96
+  concurrency: 6
+  rtf: 8.401431458332809
+  ts: 70.08750429999782
+- audio_duration: 0.62
+  concurrency: 5
+  rtf: 4.718690161262789
+  ts: 70.36951220000628
+- audio_duration: 1.64
+  concurrency: 4
+  rtf: 4.368027073165073
+  ts: 70.4130726000003
+- audio_duration: 1.02
+  concurrency: 4
+  rtf: 0.1587441176525317
+  ts: 70.57499160000589
+- audio_duration: 0.72
+  concurrency: 3
+  rtf: 6.443549166659876
+  ts: 70.63666920000105
+- audio_duration: 1.215
+  concurrency: 2
+  rtf: 2.52381497941367
+  ts: 71.02107640000759
+- audio_duration: 0.025
+  concurrency: 2
+  rtf: 0.10708800051361322
+  ts: 71.02375360002043
+- audio_duration: 1.78
+  concurrency: 1
+  rtf: 2.0098676404384688
+  ts: 71.4035401000001
+error_list:
+- 连接未开始
+- 连接未开始
+- 连接未开始
+- 连接未开始
+- 连接未开始
+- 连接未开始
+- 连接未开始
+- 连接未开始
+- 连接未开始
+- 连接未开始
+- 连接未开始
+- 连接未开始
+- 连接未开始
+- 连接未开始
+- 连接未开始
+- 连接未开始
+- 连接未开始
+- 连接未开始
+- 连接未开始
+- 连接未开始
+- 连接未开始
+- 连接未开始
+- 连接未开始
+- 连接未开始
+- 连接未开始
+- 连接未开始
+- 连接未开始
+- 连接未开始
+- 连接未开始
+- 连接未开始
+- 连接未开始
+- 连接未开始
+- 连接未开始
+- 连接未开始
+- 连接未开始
+- 连接未开始
+- 连接未开始
+max_concurrency: 31
+max_success_concurrency: 21
+model_name: inworld-tts-1-max
+qpm: 98.0
+test_mode: steady_state_qpm
+test_total_duration: 71.4035401000001
+total_failed: 37
+total_finished: 135
+total_started: 135
+total_success: 98

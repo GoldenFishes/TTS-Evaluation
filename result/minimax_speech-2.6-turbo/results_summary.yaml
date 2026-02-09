@@ -1,0 +1,109 @@
+api_name: minimax
+avg_metrics:
+  audio_duration: 157.84959375
+  rtf: 0.20123344056771647
+  total_time: 31.581854020152242
+  ttfb: 1.03820908004418
+model_name: speech-2.6-turbo
+samples:
+- metrics:
+    audio_duration: 190.96125
+    rtf: 0.1730989868384376
+    total_time: 33.05519890040159
+    ttfb: 0.8343209000304341
+  metrics_path: result\minimax_speech-2.6-turbo\long_stream\stream_1_voice_EN_man1.yaml
+  sample: stream_1
+  task: long_stream
+  voice: voice_EN_man1
+  wav_path: result\minimax_speech-2.6-turbo\long_stream\stream_1_voice_EN_man1.wav
+- metrics:
+    audio_duration: 167.14915625
+    rtf: 0.1805504256017995
+    total_time: 30.178851299919188
+    ttfb: 0.8306514993309975
+  metrics_path: result\minimax_speech-2.6-turbo\long_stream\stream_1_voice_EN_woman1.yaml
+  sample: stream_1
+  task: long_stream
+  voice: voice_EN_woman1
+  wav_path: result\minimax_speech-2.6-turbo\long_stream\stream_1_voice_EN_woman1.wav
+- metrics:
+    audio_duration: 144.56771875
+    rtf: 0.2077290681474887
+    total_time: 30.030917500145733
+    ttfb: 1.037377200089395
+  metrics_path: result\minimax_speech-2.6-turbo\long_stream\stream_1_voice_ZH_furina.yaml
+  sample: stream_1
+  task: long_stream
+  voice: voice_ZH_furina
+  wav_path: result\minimax_speech-2.6-turbo\long_stream\stream_1_voice_ZH_furina.wav
+- metrics:
+    audio_duration: 147.08709375
+    rtf: 0.20593789249284458
+    total_time: 30.290806099772453
+    ttfb: 1.1680413000285625
+  metrics_path: result\minimax_speech-2.6-turbo\long_stream\stream_1_voice_ZH_mabaoguo.yaml
+  sample: stream_1
+  task: long_stream
+  voice: voice_ZH_mabaoguo
+  wav_path: result\minimax_speech-2.6-turbo\long_stream\stream_1_voice_ZH_mabaoguo.wav
+- metrics:
+    audio_duration: 157.23434375
+    rtf: 0.20391254821171081
+    total_time: 32.062055700458586
+    ttfb: 1.1221660999581218
+  metrics_path: result\minimax_speech-2.6-turbo\long_stream\stream_1_voice_ZH_zhongli.yaml
+  sample: stream_1
+  task: long_stream
+  voice: voice_ZH_zhongli
+  wav_path: result\minimax_speech-2.6-turbo\long_stream\stream_1_voice_ZH_zhongli.wav
+- metrics:
+    audio_duration: 177.43571875
+    rtf: 0.1885673399718832
+    total_time: 33.458581500686705
+    ttfb: 0.9088705005124211
+  metrics_path: result\minimax_speech-2.6-turbo\long_stream\stream_2_voice_EN_man1.yaml
+  sample: stream_2
+  task: long_stream
+  voice: voice_EN_man1
+  wav_path: result\minimax_speech-2.6-turbo\long_stream\stream_2_voice_EN_man1.wav
+- metrics:
+    audio_duration: 164.38596875
+    rtf: 0.2272287396792892
+    total_time: 37.35321650002152
+    ttfb: 1.5295869996771216
+  metrics_path: result\minimax_speech-2.6-turbo\long_stream\stream_2_voice_EN_woman1.yaml
+  sample: stream_2
+  task: long_stream
+  voice: voice_EN_woman1
+  wav_path: result\minimax_speech-2.6-turbo\long_stream\stream_2_voice_EN_woman1.wav
+- metrics:
+    audio_duration: 137.89209375
+    rtf: 0.21878940249540293
+    total_time: 30.16932880040258
+    ttfb: 0.8296492006629705
+  metrics_path: result\minimax_speech-2.6-turbo\long_stream\stream_2_voice_ZH_furina.yaml
+  sample: stream_2
+  task: long_stream
+  voice: voice_ZH_furina
+  wav_path: result\minimax_speech-2.6-turbo\long_stream\stream_2_voice_ZH_furina.wav
+- metrics:
+    audio_duration: 139.1806875
+    rtf: 0.20982769322689715
+    total_time: 29.20396259985864
+    ttfb: 1.097147399559617
+  metrics_path: result\minimax_speech-2.6-turbo\long_stream\stream_2_voice_ZH_mabaoguo.yaml
+  sample: stream_2
+  task: long_stream
+  voice: voice_ZH_mabaoguo
+  wav_path: result\minimax_speech-2.6-turbo\long_stream\stream_2_voice_ZH_mabaoguo.wav
+- metrics:
+    audio_duration: 152.60190625
+    rtf: 0.19669230901141124
+    total_time: 30.01562129985541
+    ttfb: 1.0242797005921602
+  metrics_path: result\minimax_speech-2.6-turbo\long_stream\stream_2_voice_ZH_zhongli.yaml
+  sample: stream_2
+  task: long_stream
+  voice: voice_ZH_zhongli
+  wav_path: result\minimax_speech-2.6-turbo\long_stream\stream_2_voice_ZH_zhongli.wav
+total_samples: 10

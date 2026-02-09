@@ -1,0 +1,909 @@
+api_name: qwen
+avg_metrics:
+  audio_duration: 10.421333333333333
+  rtf: 0.35179602736541116
+  total_time: 3.6069564333185555
+  ttfb: 0.5352473155595362
+model_name: qwen3-tts-vc-realtime-2025-11-27
+samples:
+- metrics:
+    audio_duration: 13.92
+    rtf: 0.34748477728812605
+    total_time: 4.836988099850714
+    ttfb: 0.742696600034833
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\喜悦-兴奋_voice_EN_man1.yaml
+  sample: 喜悦-兴奋
+  task: emotion
+  voice: voice_EN_man1
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\喜悦-兴奋_voice_EN_man1.wav
+- metrics:
+    audio_duration: 14.0
+    rtf: 0.3514106642854001
+    total_time: 4.919749299995601
+    ttfb: 0.6922752000391483
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\喜悦-兴奋_voice_EN_woman1.yaml
+  sample: 喜悦-兴奋
+  task: emotion
+  voice: voice_EN_woman1
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\喜悦-兴奋_voice_EN_woman1.wav
+- metrics:
+    audio_duration: 12.64
+    rtf: 0.34576086239016884
+    total_time: 4.370417300611734
+    ttfb: 0.6599826002493501
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\喜悦-兴奋_voice_ZH_furina.yaml
+  sample: 喜悦-兴奋
+  task: emotion
+  voice: voice_ZH_furina
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\喜悦-兴奋_voice_ZH_furina.wav
+- metrics:
+    audio_duration: 13.52
+    rtf: 0.32842387569263665
+    total_time: 4.440290799364448
+    ttfb: 0.5148414000868797
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\喜悦-兴奋_voice_ZH_mabaoguo.yaml
+  sample: 喜悦-兴奋
+  task: emotion
+  voice: voice_ZH_mabaoguo
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\喜悦-兴奋_voice_ZH_mabaoguo.wav
+- metrics:
+    audio_duration: 14.72
+    rtf: 0.34909990493400506
+    total_time: 5.138750600628555
+    ttfb: 0.6297466000542045
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\喜悦-兴奋_voice_ZH_zhongli.yaml
+  sample: 喜悦-兴奋
+  task: emotion
+  voice: voice_ZH_zhongli
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\喜悦-兴奋_voice_ZH_zhongli.wav
+- metrics:
+    audio_duration: 13.28
+    rtf: 0.33405320031613295
+    total_time: 4.436226500198245
+    ttfb: 0.5484231002628803
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\坚定-充满希望_voice_EN_man1.yaml
+  sample: 坚定-充满希望
+  task: emotion
+  voice: voice_EN_man1
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\坚定-充满希望_voice_EN_man1.wav
+- metrics:
+    audio_duration: 13.36
+    rtf: 0.34076432630553577
+    total_time: 4.5526113994419575
+    ttfb: 0.4934650994837284
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\坚定-充满希望_voice_EN_woman1.yaml
+  sample: 坚定-充满希望
+  task: emotion
+  voice: voice_EN_woman1
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\坚定-充满希望_voice_EN_woman1.wav
+- metrics:
+    audio_duration: 11.84
+    rtf: 0.34102167229394653
+    total_time: 4.037696599960327
+    ttfb: 0.5253959000110626
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\坚定-充满希望_voice_ZH_furina.yaml
+  sample: 坚定-充满希望
+  task: emotion
+  voice: voice_ZH_furina
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\坚定-充满希望_voice_ZH_furina.wav
+- metrics:
+    audio_duration: 12.08
+    rtf: 0.33336034767786105
+    total_time: 4.026992999948561
+    ttfb: 0.5026842998340726
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\坚定-充满希望_voice_ZH_mabaoguo.yaml
+  sample: 坚定-充满希望
+  task: emotion
+  voice: voice_ZH_mabaoguo
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\坚定-充满希望_voice_ZH_mabaoguo.wav
+- metrics:
+    audio_duration: 12.4
+    rtf: 0.3560662903492489
+    total_time: 4.415222000330687
+    ttfb: 0.7219238001853228
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\坚定-充满希望_voice_ZH_zhongli.yaml
+  sample: 坚定-充满希望
+  task: emotion
+  voice: voice_ZH_zhongli
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\坚定-充满希望_voice_ZH_zhongli.wav
+- metrics:
+    audio_duration: 12.48
+    rtf: 0.33699553683758354
+    total_time: 4.205704299733043
+    ttfb: 0.5395248997956514
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\平和-睿智_voice_EN_man1.yaml
+  sample: 平和-睿智
+  task: emotion
+  voice: voice_EN_man1
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\平和-睿智_voice_EN_man1.wav
+- metrics:
+    audio_duration: 12.56
+    rtf: 0.33679917198160936
+    total_time: 4.230197600089014
+    ttfb: 0.4764973996207118
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\平和-睿智_voice_EN_woman1.yaml
+  sample: 平和-睿智
+  task: emotion
+  voice: voice_EN_woman1
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\平和-睿智_voice_EN_woman1.wav
+- metrics:
+    audio_duration: 11.04
+    rtf: 0.3490815036154042
+    total_time: 3.853859799914062
+    ttfb: 0.5809259004890919
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\平和-睿智_voice_ZH_furina.yaml
+  sample: 平和-睿智
+  task: emotion
+  voice: voice_ZH_furina
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\平和-睿智_voice_ZH_furina.wav
+- metrics:
+    audio_duration: 11.84
+    rtf: 0.33953587840802063
+    total_time: 4.020104800350964
+    ttfb: 0.5219828002154827
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\平和-睿智_voice_ZH_mabaoguo.yaml
+  sample: 平和-睿智
+  task: emotion
+  voice: voice_ZH_mabaoguo
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\平和-睿智_voice_ZH_mabaoguo.wav
+- metrics:
+    audio_duration: 12.56
+    rtf: 0.3317126751414672
+    total_time: 4.166311199776828
+    ttfb: 0.517484100535512
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\平和-睿智_voice_ZH_zhongli.yaml
+  sample: 平和-睿智
+  task: emotion
+  voice: voice_ZH_zhongli
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\平和-睿智_voice_ZH_zhongli.wav
+- metrics:
+    audio_duration: 12.0
+    rtf: 0.33498504168043536
+    total_time: 4.019820500165224
+    ttfb: 0.5003965003415942
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\平静-温和_voice_EN_man1.yaml
+  sample: 平静-温和
+  task: emotion
+  voice: voice_EN_man1
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\平静-温和_voice_EN_man1.wav
+- metrics:
+    audio_duration: 12.32
+    rtf: 0.33535578729609
+    total_time: 4.131583299487829
+    ttfb: 0.49710069969296455
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\平静-温和_voice_EN_woman1.yaml
+  sample: 平静-温和
+  task: emotion
+  voice: voice_EN_woman1
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\平静-温和_voice_EN_woman1.wav
+- metrics:
+    audio_duration: 9.76
+    rtf: 0.3427839241578381
+    total_time: 3.3455710997805
+    ttfb: 0.4914031997323036
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\平静-温和_voice_ZH_furina.yaml
+  sample: 平静-温和
+  task: emotion
+  voice: voice_ZH_furina
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\平静-温和_voice_ZH_furina.wav
+- metrics:
+    audio_duration: 10.4
+    rtf: 0.3464646442220188
+    total_time: 3.6032322999089956
+    ttfb: 0.5181574001908302
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\平静-温和_voice_ZH_mabaoguo.yaml
+  sample: 平静-温和
+  task: emotion
+  voice: voice_ZH_mabaoguo
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\平静-温和_voice_ZH_mabaoguo.wav
+- metrics:
+    audio_duration: 9.92
+    rtf: 0.34900106848292656
+    total_time: 3.4620905993506312
+    ttfb: 0.5179972993209958
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\平静-温和_voice_ZH_zhongli.yaml
+  sample: 平静-温和
+  task: emotion
+  voice: voice_ZH_zhongli
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\平静-温和_voice_ZH_zhongli.wav
+- metrics:
+    audio_duration: 9.12
+    rtf: 0.3450590240965156
+    total_time: 3.1469382997602224
+    ttfb: 0.5135781997814775
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\幽默-轻松_voice_EN_man1.yaml
+  sample: 幽默-轻松
+  task: emotion
+  voice: voice_EN_man1
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\幽默-轻松_voice_EN_man1.wav
+- metrics:
+    audio_duration: 10.48
+    rtf: 0.3382025476729938
+    total_time: 3.544362699612975
+    ttfb: 0.4971230998635292
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\幽默-轻松_voice_EN_woman1.yaml
+  sample: 幽默-轻松
+  task: emotion
+  voice: voice_EN_woman1
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\幽默-轻松_voice_EN_woman1.wav
+- metrics:
+    audio_duration: 8.88
+    rtf: 0.3660009121983773
+    total_time: 3.250088100321591
+    ttfb: 0.6455086003988981
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\幽默-轻松_voice_ZH_furina.yaml
+  sample: 幽默-轻松
+  task: emotion
+  voice: voice_ZH_furina
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\幽默-轻松_voice_ZH_furina.wav
+- metrics:
+    audio_duration: 8.72
+    rtf: 0.35421408257882936
+    total_time: 3.0887468000873923
+    ttfb: 0.5047695999965072
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\幽默-轻松_voice_ZH_mabaoguo.yaml
+  sample: 幽默-轻松
+  task: emotion
+  voice: voice_ZH_mabaoguo
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\幽默-轻松_voice_ZH_mabaoguo.wav
+- metrics:
+    audio_duration: 9.76
+    rtf: 0.33862593242150474
+    total_time: 3.304989100433886
+    ttfb: 0.5267371004447341
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\幽默-轻松_voice_ZH_zhongli.yaml
+  sample: 幽默-轻松
+  task: emotion
+  voice: voice_ZH_zhongli
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\幽默-轻松_voice_ZH_zhongli.wav
+- metrics:
+    audio_duration: 16.08
+    rtf: 0.3247425435643773
+    total_time: 5.221860100515187
+    ttfb: 0.555816700682044
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\悲伤-低落_voice_EN_man1.yaml
+  sample: 悲伤-低落
+  task: emotion
+  voice: voice_EN_man1
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\悲伤-低落_voice_EN_man1.wav
+- metrics:
+    audio_duration: 15.84
+    rtf: 0.33043323859638263
+    total_time: 5.234062499366701
+    ttfb: 0.5039940997958183
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\悲伤-低落_voice_EN_woman1.yaml
+  sample: 悲伤-低落
+  task: emotion
+  voice: voice_EN_woman1
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\悲伤-低落_voice_EN_woman1.wav
+- metrics:
+    audio_duration: 16.24
+    rtf: 0.33087872537632884
+    total_time: 5.37347050011158
+    ttfb: 0.5419041998684406
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\悲伤-低落_voice_ZH_furina.yaml
+  sample: 悲伤-低落
+  task: emotion
+  voice: voice_ZH_furina
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\悲伤-低落_voice_ZH_furina.wav
+- metrics:
+    audio_duration: 12.64
+    rtf: 0.33645462819457617
+    total_time: 4.252786500379443
+    ttfb: 0.524180700071156
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\悲伤-低落_voice_ZH_mabaoguo.yaml
+  sample: 悲伤-低落
+  task: emotion
+  voice: voice_ZH_mabaoguo
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\悲伤-低落_voice_ZH_mabaoguo.wav
+- metrics:
+    audio_duration: 17.36
+    rtf: 0.3313177015765437
+    total_time: 5.751675299368799
+    ttfb: 0.6047825999557972
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\悲伤-低落_voice_ZH_zhongli.yaml
+  sample: 悲伤-低落
+  task: emotion
+  voice: voice_ZH_zhongli
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\悲伤-低落_voice_ZH_zhongli.wav
+- metrics:
+    audio_duration: 10.8
+    rtf: 0.35834215745260867
+    total_time: 3.870095300488174
+    ttfb: 0.6576334005221725
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\愤怒-激动_voice_EN_man1.yaml
+  sample: 愤怒-激动
+  task: emotion
+  voice: voice_EN_man1
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\愤怒-激动_voice_EN_man1.wav
+- metrics:
+    audio_duration: 11.68
+    rtf: 0.33790571064917907
+    total_time: 3.9467387003824115
+    ttfb: 0.48786120023578405
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\愤怒-激动_voice_EN_woman1.yaml
+  sample: 愤怒-激动
+  task: emotion
+  voice: voice_EN_woman1
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\愤怒-激动_voice_EN_woman1.wav
+- metrics:
+    audio_duration: 11.04
+    rtf: 0.34727354169539787
+    total_time: 3.833899900317192
+    ttfb: 0.5507308002561331
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\愤怒-激动_voice_ZH_furina.yaml
+  sample: 愤怒-激动
+  task: emotion
+  voice: voice_ZH_furina
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\愤怒-激动_voice_ZH_furina.wav
+- metrics:
+    audio_duration: 9.28
+    rtf: 0.35162546334723976
+    total_time: 3.263084299862385
+    ttfb: 0.5480325995013118
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\愤怒-激动_voice_ZH_mabaoguo.yaml
+  sample: 愤怒-激动
+  task: emotion
+  voice: voice_ZH_mabaoguo
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\愤怒-激动_voice_ZH_mabaoguo.wav
+- metrics:
+    audio_duration: 11.36
+    rtf: 0.34947047538032205
+    total_time: 3.9699846003204584
+    ttfb: 0.49501669965684414
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\愤怒-激动_voice_ZH_zhongli.yaml
+  sample: 愤怒-激动
+  task: emotion
+  voice: voice_ZH_zhongli
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\愤怒-激动_voice_ZH_zhongli.wav
+- metrics:
+    audio_duration: 10.08
+    rtf: 0.3465787201772429
+    total_time: 3.4935134993866086
+    ttfb: 0.5081251002848148
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\温柔-感恩_voice_EN_man1.yaml
+  sample: 温柔-感恩
+  task: emotion
+  voice: voice_EN_man1
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\温柔-感恩_voice_EN_man1.wav
+- metrics:
+    audio_duration: 9.52
+    rtf: 0.3436557878153164
+    total_time: 3.271603100001812
+    ttfb: 0.4909820007160306
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\温柔-感恩_voice_EN_woman1.yaml
+  sample: 温柔-感恩
+  task: emotion
+  voice: voice_EN_woman1
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\温柔-感恩_voice_EN_woman1.wav
+- metrics:
+    audio_duration: 9.44
+    rtf: 0.3446692055272791
+    total_time: 3.2536773001775146
+    ttfb: 0.48418839927762747
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\温柔-感恩_voice_ZH_furina.yaml
+  sample: 温柔-感恩
+  task: emotion
+  voice: voice_ZH_furina
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\温柔-感恩_voice_ZH_furina.wav
+- metrics:
+    audio_duration: 9.12
+    rtf: 0.3457455482260373
+    total_time: 3.1531993998214602
+    ttfb: 0.49437670037150383
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\温柔-感恩_voice_ZH_mabaoguo.yaml
+  sample: 温柔-感恩
+  task: emotion
+  voice: voice_ZH_mabaoguo
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\温柔-感恩_voice_ZH_mabaoguo.wav
+- metrics:
+    audio_duration: 8.16
+    rtf: 0.36534998775916355
+    total_time: 2.9812559001147747
+    ttfb: 0.5895838001742959
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\温柔-感恩_voice_ZH_zhongli.yaml
+  sample: 温柔-感恩
+  task: emotion
+  voice: voice_ZH_zhongli
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\温柔-感恩_voice_ZH_zhongli.wav
+- metrics:
+    audio_duration: 14.64
+    rtf: 0.3378917759569372
+    total_time: 4.946735600009561
+    ttfb: 0.5494542997330427
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\焦虑-紧张_voice_EN_man1.yaml
+  sample: 焦虑-紧张
+  task: emotion
+  voice: voice_EN_man1
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\焦虑-紧张_voice_EN_man1.wav
+- metrics:
+    audio_duration: 15.2
+    rtf: 0.3391361183879015
+    total_time: 5.154868999496102
+    ttfb: 0.6565601993352175
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\焦虑-紧张_voice_EN_woman1.yaml
+  sample: 焦虑-紧张
+  task: emotion
+  voice: voice_EN_woman1
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\焦虑-紧张_voice_EN_woman1.wav
+- metrics:
+    audio_duration: 13.2
+    rtf: 0.3468627879170306
+    total_time: 4.578588800504804
+    ttfb: 0.5965623008087277
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\焦虑-紧张_voice_ZH_furina.yaml
+  sample: 焦虑-紧张
+  task: emotion
+  voice: voice_ZH_furina
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\焦虑-紧张_voice_ZH_furina.wav
+- metrics:
+    audio_duration: 13.36
+    rtf: 0.3385665569270398
+    total_time: 4.523249200545251
+    ttfb: 0.5282767005264759
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\焦虑-紧张_voice_ZH_mabaoguo.yaml
+  sample: 焦虑-紧张
+  task: emotion
+  voice: voice_ZH_mabaoguo
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\焦虑-紧张_voice_ZH_mabaoguo.wav
+- metrics:
+    audio_duration: 14.96
+    rtf: 0.32820175134173446
+    total_time: 4.909898200072348
+    ttfb: 0.5042187999933958
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\焦虑-紧张_voice_ZH_zhongli.yaml
+  sample: 焦虑-紧张
+  task: emotion
+  voice: voice_ZH_zhongli
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\emotion\焦虑-紧张_voice_ZH_zhongli.wav
+- metrics:
+    audio_duration: 6.16
+    rtf: 0.365319448166418
+    total_time: 2.250367800705135
+    ttfb: 0.4844852006062865
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\hardcase\EN_1_voice_EN_man1.yaml
+  sample: EN_1
+  task: hardcase
+  voice: voice_EN_man1
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\hardcase\EN_1_voice_EN_man1.wav
+- metrics:
+    audio_duration: 6.8
+    rtf: 0.3671373676179963
+    total_time: 2.496534099802375
+    ttfb: 0.52734399959445
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\hardcase\EN_1_voice_EN_woman1.yaml
+  sample: EN_1
+  task: hardcase
+  voice: voice_EN_woman1
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\hardcase\EN_1_voice_EN_woman1.wav
+- metrics:
+    audio_duration: 8.08
+    rtf: 0.35193235150049673
+    total_time: 2.8436134001240134
+    ttfb: 0.47363439947366714
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\hardcase\EN_1_voice_ZH_furina.yaml
+  sample: EN_1
+  task: hardcase
+  voice: voice_ZH_furina
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\hardcase\EN_1_voice_ZH_furina.wav
+- metrics:
+    audio_duration: 5.68
+    rtf: 0.3718613556743613
+    total_time: 2.112172500230372
+    ttfb: 0.46902360022068024
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\hardcase\EN_1_voice_ZH_mabaoguo.yaml
+  sample: EN_1
+  task: hardcase
+  voice: voice_ZH_mabaoguo
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\hardcase\EN_1_voice_ZH_mabaoguo.wav
+- metrics:
+    audio_duration: 6.72
+    rtf: 0.3820278720619778
+    total_time: 2.5672273002564907
+    ttfb: 0.6506457002833486
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\hardcase\EN_1_voice_ZH_zhongli.yaml
+  sample: EN_1
+  task: hardcase
+  voice: voice_ZH_zhongli
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\hardcase\EN_1_voice_ZH_zhongli.wav
+- metrics:
+    audio_duration: 11.04
+    rtf: 0.3423343478378071
+    total_time: 3.7793712001293898
+    ttfb: 0.528439300134778
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\hardcase\EN_2_voice_EN_man1.yaml
+  sample: EN_2
+  task: hardcase
+  voice: voice_EN_man1
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\hardcase\EN_2_voice_EN_man1.wav
+- metrics:
+    audio_duration: 11.52
+    rtf: 0.3450441753051968
+    total_time: 3.9749088995158672
+    ttfb: 0.539440699853003
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\hardcase\EN_2_voice_EN_woman1.yaml
+  sample: EN_2
+  task: hardcase
+  voice: voice_EN_woman1
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\hardcase\EN_2_voice_EN_woman1.wav
+- metrics:
+    audio_duration: 12.0
+    rtf: 0.33687547501176596
+    total_time: 4.0425057001411915
+    ttfb: 0.5219523003324866
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\hardcase\EN_2_voice_ZH_furina.yaml
+  sample: EN_2
+  task: hardcase
+  voice: voice_ZH_furina
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\hardcase\EN_2_voice_ZH_furina.wav
+- metrics:
+    audio_duration: 9.2
+    rtf: 0.36364159779623156
+    total_time: 3.34550269972533
+    ttfb: 0.5825594998896122
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\hardcase\EN_2_voice_ZH_mabaoguo.yaml
+  sample: EN_2
+  task: hardcase
+  voice: voice_ZH_mabaoguo
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\hardcase\EN_2_voice_ZH_mabaoguo.wav
+- metrics:
+    audio_duration: 14.0
+    rtf: 0.3344868714255946
+    total_time: 4.682816199958324
+    ttfb: 0.5370790995657444
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\hardcase\EN_2_voice_ZH_zhongli.yaml
+  sample: EN_2
+  task: hardcase
+  voice: voice_ZH_zhongli
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\hardcase\EN_2_voice_ZH_zhongli.wav
+- metrics:
+    audio_duration: 14.32
+    rtf: 0.33177249302681766
+    total_time: 4.750982100144029
+    ttfb: 0.5226881997659802
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\hardcase\ZH_1_voice_EN_man1.yaml
+  sample: ZH_1
+  task: hardcase
+  voice: voice_EN_man1
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\hardcase\ZH_1_voice_EN_man1.wav
+- metrics:
+    audio_duration: 15.68
+    rtf: 0.3405633163329556
+    total_time: 5.340032800100744
+    ttfb: 0.6326647996902466
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\hardcase\ZH_1_voice_EN_woman1.yaml
+  sample: ZH_1
+  task: hardcase
+  voice: voice_EN_woman1
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\hardcase\ZH_1_voice_EN_woman1.wav
+- metrics:
+    audio_duration: 13.2
+    rtf: 0.34204989389488194
+    total_time: 4.515058599412441
+    ttfb: 0.5366693995893002
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\hardcase\ZH_1_voice_ZH_furina.yaml
+  sample: ZH_1
+  task: hardcase
+  voice: voice_ZH_furina
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\hardcase\ZH_1_voice_ZH_furina.wav
+- metrics:
+    audio_duration: 13.92
+    rtf: 0.33685126436884977
+    total_time: 4.688969600014389
+    ttfb: 0.48453390039503574
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\hardcase\ZH_1_voice_ZH_mabaoguo.yaml
+  sample: ZH_1
+  task: hardcase
+  voice: voice_ZH_mabaoguo
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\hardcase\ZH_1_voice_ZH_mabaoguo.wav
+- metrics:
+    audio_duration: 15.76
+    rtf: 0.32879583759772296
+    total_time: 5.1818224005401134
+    ttfb: 0.49860090017318726
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\hardcase\ZH_1_voice_ZH_zhongli.yaml
+  sample: ZH_1
+  task: hardcase
+  voice: voice_ZH_zhongli
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\hardcase\ZH_1_voice_ZH_zhongli.wav
+- metrics:
+    audio_duration: 15.36
+    rtf: 0.33100261716754176
+    total_time: 5.084200199693441
+    ttfb: 0.5153566999360919
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\hardcase\ZH_2_voice_EN_man1.yaml
+  sample: ZH_2
+  task: hardcase
+  voice: voice_EN_man1
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\hardcase\ZH_2_voice_EN_man1.wav
+- metrics:
+    audio_duration: 15.6
+    rtf: 0.3279940641294114
+    total_time: 5.116707400418818
+    ttfb: 0.5657057007774711
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\hardcase\ZH_2_voice_EN_woman1.yaml
+  sample: ZH_2
+  task: hardcase
+  voice: voice_EN_woman1
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\hardcase\ZH_2_voice_EN_woman1.wav
+- metrics:
+    audio_duration: 12.8
+    rtf: 0.34436083587934263
+    total_time: 4.407818699255586
+    ttfb: 0.5851678997278214
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\hardcase\ZH_2_voice_ZH_furina.yaml
+  sample: ZH_2
+  task: hardcase
+  voice: voice_ZH_furina
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\hardcase\ZH_2_voice_ZH_furina.wav
+- metrics:
+    audio_duration: 11.44
+    rtf: 0.346765935280966
+    total_time: 3.9670022996142507
+    ttfb: 0.49920089915394783
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\hardcase\ZH_2_voice_ZH_mabaoguo.yaml
+  sample: ZH_2
+  task: hardcase
+  voice: voice_ZH_mabaoguo
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\hardcase\ZH_2_voice_ZH_mabaoguo.wav
+- metrics:
+    audio_duration: 12.8
+    rtf: 0.3481861249747453
+    total_time: 4.45678239967674
+    ttfb: 0.6370392004027963
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\hardcase\ZH_2_voice_ZH_zhongli.yaml
+  sample: ZH_2
+  task: hardcase
+  voice: voice_ZH_zhongli
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\hardcase\ZH_2_voice_ZH_zhongli.wav
+- metrics:
+    audio_duration: 8.48
+    rtf: 0.35346091981924505
+    total_time: 2.9973486000671983
+    ttfb: 0.5268905004486442
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\mixed-lingual_in-context\EN_JP_KO_voice_EN_man1.yaml
+  sample: EN_JP_KO
+  task: mixed-lingual_in-context
+  voice: voice_EN_man1
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\mixed-lingual_in-context\EN_JP_KO_voice_EN_man1.wav
+- metrics:
+    audio_duration: 7.44
+    rtf: 0.36460841400048105
+    total_time: 2.712686600163579
+    ttfb: 0.4849733002483845
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\mixed-lingual_in-context\EN_JP_KO_voice_EN_woman1.yaml
+  sample: EN_JP_KO
+  task: mixed-lingual_in-context
+  voice: voice_EN_woman1
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\mixed-lingual_in-context\EN_JP_KO_voice_EN_woman1.wav
+- metrics:
+    audio_duration: 7.36
+    rtf: 0.3646407201734331
+    total_time: 2.6837557004764676
+    ttfb: 0.5677960999310017
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\mixed-lingual_in-context\EN_JP_KO_voice_ZH_furina.yaml
+  sample: EN_JP_KO
+  task: mixed-lingual_in-context
+  voice: voice_ZH_furina
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\mixed-lingual_in-context\EN_JP_KO_voice_ZH_furina.wav
+- metrics:
+    audio_duration: 6.64
+    rtf: 0.36662585839786266
+    total_time: 2.434395699761808
+    ttfb: 0.4997376995161176
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\mixed-lingual_in-context\EN_JP_KO_voice_ZH_mabaoguo.yaml
+  sample: EN_JP_KO
+  task: mixed-lingual_in-context
+  voice: voice_ZH_mabaoguo
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\mixed-lingual_in-context\EN_JP_KO_voice_ZH_mabaoguo.wav
+- metrics:
+    audio_duration: 8.08
+    rtf: 0.3443735395788704
+    total_time: 2.7825381997972727
+    ttfb: 0.5045325998216867
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\mixed-lingual_in-context\EN_JP_KO_voice_ZH_zhongli.yaml
+  sample: EN_JP_KO
+  task: mixed-lingual_in-context
+  voice: voice_ZH_zhongli
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\mixed-lingual_in-context\EN_JP_KO_voice_ZH_zhongli.wav
+- metrics:
+    audio_duration: 7.44
+    rtf: 0.36124224456587944
+    total_time: 2.6876422995701432
+    ttfb: 0.5128097999840975
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\mixed-lingual_in-context\ZH_EN_1_voice_EN_man1.yaml
+  sample: ZH_EN_1
+  task: mixed-lingual_in-context
+  voice: voice_EN_man1
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\mixed-lingual_in-context\ZH_EN_1_voice_EN_man1.wav
+- metrics:
+    audio_duration: 8.56
+    rtf: 0.34807742993286417
+    total_time: 2.9795428002253175
+    ttfb: 0.4649854004383087
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\mixed-lingual_in-context\ZH_EN_1_voice_EN_woman1.yaml
+  sample: ZH_EN_1
+  task: mixed-lingual_in-context
+  voice: voice_EN_woman1
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\mixed-lingual_in-context\ZH_EN_1_voice_EN_woman1.wav
+- metrics:
+    audio_duration: 8.08
+    rtf: 0.3548654332286724
+    total_time: 2.8673127004876733
+    ttfb: 0.49162849970161915
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\mixed-lingual_in-context\ZH_EN_1_voice_ZH_furina.yaml
+  sample: ZH_EN_1
+  task: mixed-lingual_in-context
+  voice: voice_ZH_furina
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\mixed-lingual_in-context\ZH_EN_1_voice_ZH_furina.wav
+- metrics:
+    audio_duration: 8.0
+    rtf: 0.36057305010035634
+    total_time: 2.8845844008028507
+    ttfb: 0.5077982004731894
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\mixed-lingual_in-context\ZH_EN_1_voice_ZH_mabaoguo.yaml
+  sample: ZH_EN_1
+  task: mixed-lingual_in-context
+  voice: voice_ZH_mabaoguo
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\mixed-lingual_in-context\ZH_EN_1_voice_ZH_mabaoguo.wav
+- metrics:
+    audio_duration: 7.84
+    rtf: 0.36041665815140067
+    total_time: 2.825666599906981
+    ttfb: 0.5060101002454758
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\mixed-lingual_in-context\ZH_EN_1_voice_ZH_zhongli.yaml
+  sample: ZH_EN_1
+  task: mixed-lingual_in-context
+  voice: voice_ZH_zhongli
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\mixed-lingual_in-context\ZH_EN_1_voice_ZH_zhongli.wav
+- metrics:
+    audio_duration: 8.48
+    rtf: 0.35351303072189383
+    total_time: 2.99779050052166
+    ttfb: 0.49288460053503513
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\mixed-lingual_in-context\ZH_EN_2_voice_EN_man1.yaml
+  sample: ZH_EN_2
+  task: mixed-lingual_in-context
+  voice: voice_EN_man1
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\mixed-lingual_in-context\ZH_EN_2_voice_EN_man1.wav
+- metrics:
+    audio_duration: 8.88
+    rtf: 0.3565045607460847
+    total_time: 3.1657604994252324
+    ttfb: 0.4839639998972416
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\mixed-lingual_in-context\ZH_EN_2_voice_EN_woman1.yaml
+  sample: ZH_EN_2
+  task: mixed-lingual_in-context
+  voice: voice_EN_woman1
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\mixed-lingual_in-context\ZH_EN_2_voice_EN_woman1.wav
+- metrics:
+    audio_duration: 7.2
+    rtf: 0.3558260415835927
+    total_time: 2.5619474994018674
+    ttfb: 0.512127099558711
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\mixed-lingual_in-context\ZH_EN_2_voice_ZH_furina.yaml
+  sample: ZH_EN_2
+  task: mixed-lingual_in-context
+  voice: voice_ZH_furina
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\mixed-lingual_in-context\ZH_EN_2_voice_ZH_furina.wav
+- metrics:
+    audio_duration: 9.12
+    rtf: 0.36372240130348427
+    total_time: 3.3171482998877764
+    ttfb: 0.6173115996643901
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\mixed-lingual_in-context\ZH_EN_2_voice_ZH_mabaoguo.yaml
+  sample: ZH_EN_2
+  task: mixed-lingual_in-context
+  voice: voice_ZH_mabaoguo
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\mixed-lingual_in-context\ZH_EN_2_voice_ZH_mabaoguo.wav
+- metrics:
+    audio_duration: 7.6
+    rtf: 0.356602684202555
+    total_time: 2.710180399939418
+    ttfb: 0.46884030010551214
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\mixed-lingual_in-context\ZH_EN_2_voice_ZH_zhongli.yaml
+  sample: ZH_EN_2
+  task: mixed-lingual_in-context
+  voice: voice_ZH_zhongli
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\mixed-lingual_in-context\ZH_EN_2_voice_ZH_zhongli.wav
+- metrics:
+    audio_duration: 5.28
+    rtf: 0.3728621589922995
+    total_time: 1.9687121994793415
+    ttfb: 0.45793360006064177
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\mixed-lingual_in-context\ZH_EN_JP_KO_1_voice_EN_man1.yaml
+  sample: ZH_EN_JP_KO_1
+  task: mixed-lingual_in-context
+  voice: voice_EN_man1
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\mixed-lingual_in-context\ZH_EN_JP_KO_1_voice_EN_man1.wav
+- metrics:
+    audio_duration: 5.28
+    rtf: 0.3839641287358421
+    total_time: 2.0273305997252464
+    ttfb: 0.5030226996168494
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\mixed-lingual_in-context\ZH_EN_JP_KO_1_voice_EN_woman1.yaml
+  sample: ZH_EN_JP_KO_1
+  task: mixed-lingual_in-context
+  voice: voice_EN_woman1
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\mixed-lingual_in-context\ZH_EN_JP_KO_1_voice_EN_woman1.wav
+- metrics:
+    audio_duration: 4.96
+    rtf: 0.38454895163135183
+    total_time: 1.907362800091505
+    ttfb: 0.5139827001839876
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\mixed-lingual_in-context\ZH_EN_JP_KO_1_voice_ZH_furina.yaml
+  sample: ZH_EN_JP_KO_1
+  task: mixed-lingual_in-context
+  voice: voice_ZH_furina
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\mixed-lingual_in-context\ZH_EN_JP_KO_1_voice_ZH_furina.wav
+- metrics:
+    audio_duration: 4.24
+    rtf: 0.3866384199047285
+    total_time: 1.639346900396049
+    ttfb: 0.5442754998803139
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\mixed-lingual_in-context\ZH_EN_JP_KO_1_voice_ZH_mabaoguo.yaml
+  sample: ZH_EN_JP_KO_1
+  task: mixed-lingual_in-context
+  voice: voice_ZH_mabaoguo
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\mixed-lingual_in-context\ZH_EN_JP_KO_1_voice_ZH_mabaoguo.wav
+- metrics:
+    audio_duration: 5.44
+    rtf: 0.3733945770791786
+    total_time: 2.031266499310732
+    ttfb: 0.469242999330163
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\mixed-lingual_in-context\ZH_EN_JP_KO_1_voice_ZH_zhongli.yaml
+  sample: ZH_EN_JP_KO_1
+  task: mixed-lingual_in-context
+  voice: voice_ZH_zhongli
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\mixed-lingual_in-context\ZH_EN_JP_KO_1_voice_ZH_zhongli.wav
+- metrics:
+    audio_duration: 3.2
+    rtf: 0.41779418737860397
+    total_time: 1.3369413996115327
+    ttfb: 0.48240319918841124
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\mixed-lingual_in-context\ZH_EN_JP_KO_2_voice_EN_man1.yaml
+  sample: ZH_EN_JP_KO_2
+  task: mixed-lingual_in-context
+  voice: voice_EN_man1
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\mixed-lingual_in-context\ZH_EN_JP_KO_2_voice_EN_man1.wav
+- metrics:
+    audio_duration: 3.68
+    rtf: 0.40679961954162497
+    total_time: 1.4970225999131799
+    ttfb: 0.49580319970846176
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\mixed-lingual_in-context\ZH_EN_JP_KO_2_voice_EN_woman1.yaml
+  sample: ZH_EN_JP_KO_2
+  task: mixed-lingual_in-context
+  voice: voice_EN_woman1
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\mixed-lingual_in-context\ZH_EN_JP_KO_2_voice_EN_woman1.wav
+- metrics:
+    audio_duration: 3.6
+    rtf: 0.40646930535634357
+    total_time: 1.463289499282837
+    ttfb: 0.4946070993319154
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\mixed-lingual_in-context\ZH_EN_JP_KO_2_voice_ZH_furina.yaml
+  sample: ZH_EN_JP_KO_2
+  task: mixed-lingual_in-context
+  voice: voice_ZH_furina
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\mixed-lingual_in-context\ZH_EN_JP_KO_2_voice_ZH_furina.wav
+- metrics:
+    audio_duration: 3.68
+    rtf: 0.40365638611230836
+    total_time: 1.4854555008932948
+    ttfb: 0.4983465000987053
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\mixed-lingual_in-context\ZH_EN_JP_KO_2_voice_ZH_mabaoguo.yaml
+  sample: ZH_EN_JP_KO_2
+  task: mixed-lingual_in-context
+  voice: voice_ZH_mabaoguo
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\mixed-lingual_in-context\ZH_EN_JP_KO_2_voice_ZH_mabaoguo.wav
+- metrics:
+    audio_duration: 3.68
+    rtf: 0.41409241840364813
+    total_time: 1.5238600997254252
+    ttfb: 0.5252170003950596
+  metrics_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\mixed-lingual_in-context\ZH_EN_JP_KO_2_voice_ZH_zhongli.yaml
+  sample: ZH_EN_JP_KO_2
+  task: mixed-lingual_in-context
+  voice: voice_ZH_zhongli
+  wav_path: result\qwen_qwen3-tts-vc-realtime-2025-11-27\mixed-lingual_in-context\ZH_EN_JP_KO_2_voice_ZH_zhongli.wav
+total_samples: 90

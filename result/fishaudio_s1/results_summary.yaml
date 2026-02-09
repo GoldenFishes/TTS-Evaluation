@@ -1,0 +1,459 @@
+api_name: fishaudio
+avg_metrics:
+  audio_duration: 11.000066515495087
+  rtf: 0.7817189199851122
+  total_time: 8.53691264440616
+  ttfb: 2.939804344396624
+model_name: s1
+samples:
+- metrics:
+    audio_duration: 13.885532879818594
+    rtf: 0.8556580221008203
+    total_time: 11.881267599761486
+    ttfb: 2.911194199696183
+  metrics_path: result\fishaudio_s1\emotion\喜悦-兴奋_voice_EN_man1.yaml
+  sample: 喜悦-兴奋
+  task: emotion
+  voice: voice_EN_man1
+  wav_path: result\fishaudio_s1\emotion\喜悦-兴奋_voice_EN_man1.wav
+- metrics:
+    audio_duration: 14.349931972789115
+    rtf: 0.4681288045874469
+    total_time: 6.7176165003329515
+    ttfb: 1.9649176998063922
+  metrics_path: result\fishaudio_s1\emotion\喜悦-兴奋_voice_EN_woman1.yaml
+  sample: 喜悦-兴奋
+  task: emotion
+  voice: voice_EN_woman1
+  wav_path: result\fishaudio_s1\emotion\喜悦-兴奋_voice_EN_woman1.wav
+- metrics:
+    audio_duration: 12.399455782312925
+    rtf: 0.595631931705458
+    total_time: 7.385511799715459
+    ttfb: 2.3797236997634172
+  metrics_path: result\fishaudio_s1\emotion\喜悦-兴奋_voice_ZH_furina.yaml
+  sample: 喜悦-兴奋
+  task: emotion
+  voice: voice_ZH_furina
+  wav_path: result\fishaudio_s1\emotion\喜悦-兴奋_voice_ZH_furina.wav
+- metrics:
+    audio_duration: 13.374693877551021
+    rtf: 0.5610115692107343
+    total_time: 7.503357999958098
+    ttfb: 2.2943682996556163
+  metrics_path: result\fishaudio_s1\emotion\喜悦-兴奋_voice_ZH_mabaoguo.yaml
+  sample: 喜悦-兴奋
+  task: emotion
+  voice: voice_ZH_mabaoguo
+  wav_path: result\fishaudio_s1\emotion\喜悦-兴奋_voice_ZH_mabaoguo.wav
+- metrics:
+    audio_duration: 12.678095238095239
+    rtf: 0.7293673084160008
+    total_time: 9.246988199651241
+    ttfb: 7.7057317001745105
+  metrics_path: result\fishaudio_s1\emotion\喜悦-兴奋_voice_ZH_zhongli.yaml
+  sample: 喜悦-兴奋
+  task: emotion
+  voice: voice_ZH_zhongli
+  wav_path: result\fishaudio_s1\emotion\喜悦-兴奋_voice_ZH_zhongli.wav
+- metrics:
+    audio_duration: 13.514013605442177
+    rtf: 0.4815425372787113
+    total_time: 6.507572400383651
+    ttfb: 2.8825710006058216
+  metrics_path: result\fishaudio_s1\emotion\坚定-充满希望_voice_EN_man1.yaml
+  sample: 坚定-充满希望
+  task: emotion
+  voice: voice_EN_man1
+  wav_path: result\fishaudio_s1\emotion\坚定-充满希望_voice_EN_man1.wav
+- metrics:
+    audio_duration: 12.027936507936507
+    rtf: 1.599220596740083
+    total_time: 19.23532379977405
+    ttfb: 3.5383903002366424
+  metrics_path: result\fishaudio_s1\emotion\坚定-充满希望_voice_EN_woman1.yaml
+  sample: 坚定-充满希望
+  task: emotion
+  voice: voice_EN_woman1
+  wav_path: result\fishaudio_s1\emotion\坚定-充满希望_voice_EN_woman1.wav
+- metrics:
+    audio_duration: 11.842176870748299
+    rtf: 0.7230617557856663
+    total_time: 8.562625200487673
+    ttfb: 1.8064077999442816
+  metrics_path: result\fishaudio_s1\emotion\坚定-充满希望_voice_ZH_furina.yaml
+  sample: 坚定-充满希望
+  task: emotion
+  voice: voice_ZH_furina
+  wav_path: result\fishaudio_s1\emotion\坚定-充满希望_voice_ZH_furina.wav
+- metrics:
+    audio_duration: 11.23845804988662
+    rtf: 0.5031294573414504
+    total_time: 5.654399299994111
+    ttfb: 1.4658000003546476
+  metrics_path: result\fishaudio_s1\emotion\坚定-充满希望_voice_ZH_mabaoguo.yaml
+  sample: 坚定-充满希望
+  task: emotion
+  voice: voice_ZH_mabaoguo
+  wav_path: result\fishaudio_s1\emotion\坚定-充满希望_voice_ZH_mabaoguo.wav
+- metrics:
+    audio_duration: 11.888616780045352
+    rtf: 0.5908620767666406
+    total_time: 7.024532800540328
+    ttfb: 2.4000995997339487
+  metrics_path: result\fishaudio_s1\emotion\坚定-充满希望_voice_ZH_zhongli.yaml
+  sample: 坚定-充满希望
+  task: emotion
+  voice: voice_ZH_zhongli
+  wav_path: result\fishaudio_s1\emotion\坚定-充满希望_voice_ZH_zhongli.wav
+- metrics:
+    audio_duration: 13.142494331065759
+    rtf: 1.126972485350669
+    total_time: 14.811229499988258
+    ttfb: 2.876976099796593
+  metrics_path: result\fishaudio_s1\emotion\平和-睿智_voice_EN_man1.yaml
+  sample: 平和-睿智
+  task: emotion
+  voice: voice_EN_man1
+  wav_path: result\fishaudio_s1\emotion\平和-睿智_voice_EN_man1.wav
+- metrics:
+    audio_duration: 10.077460317460318
+    rtf: 2.1156418709045783
+    total_time: 21.32029699999839
+    ttfb: 5.157049300149083
+  metrics_path: result\fishaudio_s1\emotion\平和-睿智_voice_EN_woman1.yaml
+  sample: 平和-睿智
+  task: emotion
+  voice: voice_EN_woman1
+  wav_path: result\fishaudio_s1\emotion\平和-睿智_voice_EN_woman1.wav
+- metrics:
+    audio_duration: 10.309659863945578
+    rtf: 0.5965848806288311
+    total_time: 6.150587199255824
+    ttfb: 2.4010434998199344
+  metrics_path: result\fishaudio_s1\emotion\平和-睿智_voice_ZH_furina.yaml
+  sample: 平和-睿智
+  task: emotion
+  voice: voice_ZH_furina
+  wav_path: result\fishaudio_s1\emotion\平和-睿智_voice_ZH_furina.wav
+- metrics:
+    audio_duration: 11.052698412698414
+    rtf: 0.7175941479371271
+    total_time: 7.9313516998663545
+    ttfb: 4.352940199896693
+  metrics_path: result\fishaudio_s1\emotion\平和-睿智_voice_ZH_mabaoguo.yaml
+  sample: 平和-睿智
+  task: emotion
+  voice: voice_ZH_mabaoguo
+  wav_path: result\fishaudio_s1\emotion\平和-睿智_voice_ZH_mabaoguo.wav
+- metrics:
+    audio_duration: 11.377777777777778
+    rtf: 0.4666433642159973
+    total_time: 5.309364499524236
+    ttfb: 1.5520755993202329
+  metrics_path: result\fishaudio_s1\emotion\平和-睿智_voice_ZH_zhongli.yaml
+  sample: 平和-睿智
+  task: emotion
+  voice: voice_ZH_zhongli
+  wav_path: result\fishaudio_s1\emotion\平和-睿智_voice_ZH_zhongli.wav
+- metrics:
+    audio_duration: 10.031020408163265
+    rtf: 0.8893413866360333
+    total_time: 8.921001599170268
+    ttfb: 5.640082499943674
+  metrics_path: result\fishaudio_s1\emotion\平静-温和_voice_EN_man1.yaml
+  sample: 平静-温和
+  task: emotion
+  voice: voice_EN_man1
+  wav_path: result\fishaudio_s1\emotion\平静-温和_voice_EN_man1.wav
+- metrics:
+    audio_duration: 9.148662131519274
+    rtf: 0.8770583266192115
+    total_time: 8.023910299874842
+    ttfb: 3.8824094999581575
+  metrics_path: result\fishaudio_s1\emotion\平静-温和_voice_EN_woman1.yaml
+  sample: 平静-温和
+  task: emotion
+  voice: voice_EN_woman1
+  wav_path: result\fishaudio_s1\emotion\平静-温和_voice_EN_woman1.wav
+- metrics:
+    audio_duration: 8.126984126984127
+    rtf: 0.8733783885418234
+    total_time: 7.097932300530374
+    ttfb: 5.485643500462174
+  metrics_path: result\fishaudio_s1\emotion\平静-温和_voice_ZH_furina.yaml
+  sample: 平静-温和
+  task: emotion
+  voice: voice_ZH_furina
+  wav_path: result\fishaudio_s1\emotion\平静-温和_voice_ZH_furina.wav
+- metrics:
+    audio_duration: 9.47374149659864
+    rtf: 0.5062488565773919
+    total_time: 4.796070800162852
+    ttfb: 2.032745100557804
+  metrics_path: result\fishaudio_s1\emotion\平静-温和_voice_ZH_mabaoguo.yaml
+  sample: 平静-温和
+  task: emotion
+  voice: voice_ZH_mabaoguo
+  wav_path: result\fishaudio_s1\emotion\平静-温和_voice_ZH_mabaoguo.wav
+- metrics:
+    audio_duration: 8.916462585034013
+    rtf: 0.5479701455129771
+    total_time: 4.885955300182104
+    ttfb: 1.5161117995157838
+  metrics_path: result\fishaudio_s1\emotion\平静-温和_voice_ZH_zhongli.yaml
+  sample: 平静-温和
+  task: emotion
+  voice: voice_ZH_zhongli
+  wav_path: result\fishaudio_s1\emotion\平静-温和_voice_ZH_zhongli.wav
+- metrics:
+    audio_duration: 8.6378231292517
+    rtf: 2.449888783772739
+    total_time: 21.161706000566483
+    ttfb: 3.2196957003325224
+  metrics_path: result\fishaudio_s1\emotion\幽默-轻松_voice_EN_man1.yaml
+  sample: 幽默-轻松
+  task: emotion
+  voice: voice_EN_man1
+  wav_path: result\fishaudio_s1\emotion\幽默-轻松_voice_EN_man1.wav
+- metrics:
+    audio_duration: 9.566621315192744
+    rtf: 0.6995342325329421
+    total_time: 6.6921790996566415
+    ttfb: 2.3137296000495553
+  metrics_path: result\fishaudio_s1\emotion\幽默-轻松_voice_EN_woman1.yaml
+  sample: 幽默-轻松
+  task: emotion
+  voice: voice_EN_woman1
+  wav_path: result\fishaudio_s1\emotion\幽默-轻松_voice_EN_woman1.wav
+- metrics:
+    audio_duration: 8.6378231292517
+    rtf: 0.4804396476130581
+    total_time: 4.1499527003616095
+    ttfb: 2.019937800243497
+  metrics_path: result\fishaudio_s1\emotion\幽默-轻松_voice_ZH_furina.yaml
+  sample: 幽默-轻松
+  task: emotion
+  voice: voice_ZH_furina
+  wav_path: result\fishaudio_s1\emotion\幽默-轻松_voice_ZH_furina.wav
+- metrics:
+    audio_duration: 8.219863945578231
+    rtf: 0.4760360057266013
+    total_time: 3.9129512002691627
+    ttfb: 1.9906852003186941
+  metrics_path: result\fishaudio_s1\emotion\幽默-轻松_voice_ZH_mabaoguo.yaml
+  sample: 幽默-轻松
+  task: emotion
+  voice: voice_ZH_mabaoguo
+  wav_path: result\fishaudio_s1\emotion\幽默-轻松_voice_ZH_mabaoguo.wav
+- metrics:
+    audio_duration: 8.823582766439909
+    rtf: 0.5016872190749143
+    total_time: 4.426678700372577
+    ttfb: 2.0804719999432564
+  metrics_path: result\fishaudio_s1\emotion\幽默-轻松_voice_ZH_zhongli.yaml
+  sample: 幽默-轻松
+  task: emotion
+  voice: voice_ZH_zhongli
+  wav_path: result\fishaudio_s1\emotion\幽默-轻松_voice_ZH_zhongli.wav
+- metrics:
+    audio_duration: 14.396371882086168
+    rtf: 0.6430828180851501
+    total_time: 9.258059400133789
+    ttfb: 2.9683940997347236
+  metrics_path: result\fishaudio_s1\emotion\悲伤-低落_voice_EN_man1.yaml
+  sample: 悲伤-低落
+  task: emotion
+  voice: voice_EN_man1
+  wav_path: result\fishaudio_s1\emotion\悲伤-低落_voice_EN_man1.wav
+- metrics:
+    audio_duration: 13.514013605442177
+    rtf: 0.5722266252979755
+    total_time: 7.733078399673104
+    ttfb: 4.293918999843299
+  metrics_path: result\fishaudio_s1\emotion\悲伤-低落_voice_EN_woman1.yaml
+  sample: 悲伤-低落
+  task: emotion
+  voice: voice_EN_woman1
+  wav_path: result\fishaudio_s1\emotion\悲伤-低落_voice_EN_woman1.wav
+- metrics:
+    audio_duration: 12.956734693877552
+    rtf: 0.91141912513605
+    total_time: 11.809015799313784
+    ttfb: 4.665775999426842
+  metrics_path: result\fishaudio_s1\emotion\悲伤-低落_voice_ZH_furina.yaml
+  sample: 悲伤-低落
+  task: emotion
+  voice: voice_ZH_furina
+  wav_path: result\fishaudio_s1\emotion\悲伤-低落_voice_ZH_furina.wav
+- metrics:
+    audio_duration: 13.003174603174603
+    rtf: 0.7949758436029697
+    total_time: 10.33720969967544
+    ttfb: 2.262015599757433
+  metrics_path: result\fishaudio_s1\emotion\悲伤-低落_voice_ZH_mabaoguo.yaml
+  sample: 悲伤-低落
+  task: emotion
+  voice: voice_ZH_mabaoguo
+  wav_path: result\fishaudio_s1\emotion\悲伤-低落_voice_ZH_mabaoguo.wav
+- metrics:
+    audio_duration: 12.399455782312925
+    rtf: 1.7061086286196698
+    total_time: 21.15481850039214
+    ttfb: 3.2120233001187444
+  metrics_path: result\fishaudio_s1\emotion\悲伤-低落_voice_ZH_zhongli.yaml
+  sample: 悲伤-低落
+  task: emotion
+  voice: voice_ZH_zhongli
+  wav_path: result\fishaudio_s1\emotion\悲伤-低落_voice_ZH_zhongli.wav
+- metrics:
+    audio_duration: 10.031020408163265
+    rtf: 0.4851991425084634
+    total_time: 4.867042500525713
+    ttfb: 2.1832076003775
+  metrics_path: result\fishaudio_s1\emotion\愤怒-激动_voice_EN_man1.yaml
+  sample: 愤怒-激动
+  task: emotion
+  voice: voice_EN_man1
+  wav_path: result\fishaudio_s1\emotion\愤怒-激动_voice_EN_man1.wav
+- metrics:
+    audio_duration: 10.077460317460318
+    rtf: 0.5882121202082471
+    total_time: 5.927684299647808
+    ttfb: 2.627400799654424
+  metrics_path: result\fishaudio_s1\emotion\愤怒-激动_voice_EN_woman1.yaml
+  sample: 愤怒-激动
+  task: emotion
+  voice: voice_EN_woman1
+  wav_path: result\fishaudio_s1\emotion\愤怒-激动_voice_EN_woman1.wav
+- metrics:
+    audio_duration: 9.334421768707482
+    rtf: 0.6661927705483404
+    total_time: 6.218524299561977
+    ttfb: 2.074338600039482
+  metrics_path: result\fishaudio_s1\emotion\愤怒-激动_voice_ZH_furina.yaml
+  sample: 愤怒-激动
+  task: emotion
+  voice: voice_ZH_furina
+  wav_path: result\fishaudio_s1\emotion\愤怒-激动_voice_ZH_furina.wav
+- metrics:
+    audio_duration: 9.47374149659864
+    rtf: 0.8285850107921867
+    total_time: 7.849800200201571
+    ttfb: 3.2970225997269154
+  metrics_path: result\fishaudio_s1\emotion\愤怒-激动_voice_ZH_mabaoguo.yaml
+  sample: 愤怒-激动
+  task: emotion
+  voice: voice_ZH_mabaoguo
+  wav_path: result\fishaudio_s1\emotion\愤怒-激动_voice_ZH_mabaoguo.wav
+- metrics:
+    audio_duration: 9.845260770975056
+    rtf: 1.041560547636831
+    total_time: 10.254435200244188
+    ttfb: 6.8880436001345515
+  metrics_path: result\fishaudio_s1\emotion\愤怒-激动_voice_ZH_zhongli.yaml
+  sample: 愤怒-激动
+  task: emotion
+  voice: voice_ZH_zhongli
+  wav_path: result\fishaudio_s1\emotion\愤怒-激动_voice_ZH_zhongli.wav
+- metrics:
+    audio_duration: 9.241541950113378
+    rtf: 0.5667289320510336
+    total_time: 5.2374491998925805
+    ttfb: 2.365845499560237
+  metrics_path: result\fishaudio_s1\emotion\温柔-感恩_voice_EN_man1.yaml
+  sample: 温柔-感恩
+  task: emotion
+  voice: voice_EN_man1
+  wav_path: result\fishaudio_s1\emotion\温柔-感恩_voice_EN_man1.wav
+- metrics:
+    audio_duration: 9.287981859410431
+    rtf: 0.5013166660280604
+    total_time: 4.656220099888742
+    ttfb: 2.253656799905002
+  metrics_path: result\fishaudio_s1\emotion\温柔-感恩_voice_EN_woman1.yaml
+  sample: 温柔-感恩
+  task: emotion
+  voice: voice_EN_woman1
+  wav_path: result\fishaudio_s1\emotion\温柔-感恩_voice_EN_woman1.wav
+- metrics:
+    audio_duration: 8.6378231292517
+    rtf: 0.7975583774982772
+    total_time: 6.889168200083077
+    ttfb: 1.7365322997793555
+  metrics_path: result\fishaudio_s1\emotion\温柔-感恩_voice_ZH_furina.yaml
+  sample: 温柔-感恩
+  task: emotion
+  voice: voice_ZH_furina
+  wav_path: result\fishaudio_s1\emotion\温柔-感恩_voice_ZH_furina.wav
+- metrics:
+    audio_duration: 8.777142857142858
+    rtf: 0.7357929459279451
+    total_time: 6.458159799687564
+    ttfb: 2.356810700148344
+  metrics_path: result\fishaudio_s1\emotion\温柔-感恩_voice_ZH_mabaoguo.yaml
+  sample: 温柔-感恩
+  task: emotion
+  voice: voice_ZH_mabaoguo
+  wav_path: result\fishaudio_s1\emotion\温柔-感恩_voice_ZH_mabaoguo.wav
+- metrics:
+    audio_duration: 9.102222222222222
+    rtf: 0.6348749963763112
+    total_time: 5.778773300349712
+    ttfb: 2.355121400207281
+  metrics_path: result\fishaudio_s1\emotion\温柔-感恩_voice_ZH_zhongli.yaml
+  sample: 温柔-感恩
+  task: emotion
+  voice: voice_ZH_zhongli
+  wav_path: result\fishaudio_s1\emotion\温柔-感恩_voice_ZH_zhongli.wav
+- metrics:
+    audio_duration: 13.049614512471654
+    rtf: 0.5871498573752786
+    total_time: 7.662079299800098
+    ttfb: 2.3593899002298713
+  metrics_path: result\fishaudio_s1\emotion\焦虑-紧张_voice_EN_man1.yaml
+  sample: 焦虑-紧张
+  task: emotion
+  voice: voice_EN_man1
+  wav_path: result\fishaudio_s1\emotion\焦虑-紧张_voice_EN_man1.wav
+- metrics:
+    audio_duration: 12.120816326530612
+    rtf: 1.0427587515002008
+    total_time: 12.63908729981631
+    ttfb: 1.7518403995782137
+  metrics_path: result\fishaudio_s1\emotion\焦虑-紧张_voice_EN_woman1.yaml
+  sample: 焦虑-紧张
+  task: emotion
+  voice: voice_EN_woman1
+  wav_path: result\fishaudio_s1\emotion\焦虑-紧张_voice_EN_woman1.wav
+- metrics:
+    audio_duration: 11.517097505668934
+    rtf: 0.662571962805252
+    total_time: 7.6309059001505375
+    ttfb: 2.77046009991318
+  metrics_path: result\fishaudio_s1\emotion\焦虑-紧张_voice_ZH_furina.yaml
+  sample: 焦虑-紧张
+  task: emotion
+  voice: voice_ZH_furina
+  wav_path: result\fishaudio_s1\emotion\焦虑-紧张_voice_ZH_furina.wav
+- metrics:
+    audio_duration: 12.538775510204081
+    rtf: 0.4491041485592481
+    total_time: 5.631216099485755
+    ttfb: 2.248035700060427
+  metrics_path: result\fishaudio_s1\emotion\焦虑-紧张_voice_ZH_mabaoguo.yaml
+  sample: 焦虑-紧张
+  task: emotion
+  voice: voice_ZH_mabaoguo
+  wav_path: result\fishaudio_s1\emotion\焦虑-紧张_voice_ZH_mabaoguo.wav
+- metrics:
+    audio_duration: 12.956734693877552
+    rtf: 0.5292983271946498
+    total_time: 6.85797799937427
+    ttfb: 1.7505597993731499
+  metrics_path: result\fishaudio_s1\emotion\焦虑-紧张_voice_ZH_zhongli.yaml
+  sample: 焦虑-紧张
+  task: emotion
+  voice: voice_ZH_zhongli
+  wav_path: result\fishaudio_s1\emotion\焦虑-紧张_voice_ZH_zhongli.wav
+total_samples: 45

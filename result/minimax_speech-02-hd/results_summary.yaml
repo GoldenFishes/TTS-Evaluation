@@ -1,0 +1,49 @@
+api_name: minimax
+avg_metrics:
+  audio_duration: 148.76184375
+  rtf: 0.2054887158175
+  total_time: 30.545544024993433
+  ttfb: 0.8519218999863369
+model_name: speech-02-hd
+samples:
+- metrics:
+    audio_duration: 146.70403125
+    rtf: 0.22519618117163676
+    total_time: 33.03718759998446
+    ttfb: 1.5780406999983825
+  metrics_path: result\minimax_speech-02-hd\long_stream\stream_1_voice_ZH_furina.yaml
+  sample: stream_1
+  task: long_stream
+  voice: voice_ZH_furina
+  wav_path: result\minimax_speech-02-hd\long_stream\stream_1_voice_ZH_furina.wav
+- metrics:
+    audio_duration: 157.03684375
+    rtf: 0.19402665115023177
+    total_time: 30.469332900014706
+    ttfb: 0.9224187000072561
+  metrics_path: result\minimax_speech-02-hd\long_stream\stream_1_voice_ZH_zhongli.yaml
+  sample: stream_1
+  task: long_stream
+  voice: voice_ZH_zhongli
+  wav_path: result\minimax_speech-02-hd\long_stream\stream_1_voice_ZH_zhongli.wav
+- metrics:
+    audio_duration: 141.9555
+    rtf: 0.19914487920489843
+    total_time: 28.26971089997096
+    ttfb: 0.4262038999586366
+  metrics_path: result\minimax_speech-02-hd\long_stream\stream_2_voice_ZH_furina.yaml
+  sample: stream_2
+  task: long_stream
+  voice: voice_ZH_furina
+  wav_path: result\minimax_speech-02-hd\long_stream\stream_2_voice_ZH_furina.wav
+- metrics:
+    audio_duration: 149.351
+    rtf: 0.20358715174323308
+    total_time: 30.4059447000036
+    ttfb: 0.48102429998107255
+  metrics_path: result\minimax_speech-02-hd\long_stream\stream_2_voice_ZH_zhongli.yaml
+  sample: stream_2
+  task: long_stream
+  voice: voice_ZH_zhongli
+  wav_path: result\minimax_speech-02-hd\long_stream\stream_2_voice_ZH_zhongli.wav
+total_samples: 4
